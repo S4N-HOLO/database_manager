@@ -16,7 +16,8 @@ namespace datagridview_and_database
 {
     public partial class Form1 : Form
     {
-        OleDbConnection con = new OleDbConnection();
+        OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=C:\\Users\\Tommy\\Desktop\\BAZA.mdb");
+
         OleDbDataAdapter da = new OleDbDataAdapter();
         BindingSource bs = new BindingSource();
         DataSet ds = new DataSet();
@@ -28,7 +29,6 @@ namespace datagridview_and_database
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=C:\\Users\\Tommy\\Desktop\\BAZA.mdb");
             con.Open();
             da = new OleDbDataAdapter("select*from baza", con);
             ds = new DataSet();
@@ -42,9 +42,23 @@ namespace datagridview_and_database
         private void refresh(object sender, EventArgs e)
         {
            
-           OleDbCommand Ins = new OleDbCommand("INSERT INTO BAZA(field1, field2, field3, field4) VALUES (1, 2, 3, 4)");
+           OleDbCommand Ins = new OleDbCommand("INSERT INTO BAZA(field1, field2, field3, field4) VALUES (1, 2, 3, 4)", con);
             con.Open();
             Ins.ExecuteNonQuery();
+            con.Close();
+        }
+
+
+        private void update_dgv(object sender, EventArgs e)
+        {
+            OleDbCommand refresh = new OleDbCommand("select*from baza", con);
+            
+            dataGridView1.DataSource = null;
+            con.Open();
+            ds = new DataSet();
+            da.Fill(ds);
+            bs = new BindingSource(ds, ds.Tables[0].TableName);
+            dataGridView1.DataSource = bs;
             con.Close();
         }
     }
