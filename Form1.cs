@@ -41,8 +41,11 @@ namespace datagridview_and_database
 
         private void refresh(object sender, EventArgs e)
         {
-            //string uodate_command = "INSERT INTO BAZA() VALUES ()";
-            //OleDbCommand ref = new OleDbCommand(uodate_command, con );
+           
+           OleDbCommand Ins = new OleDbCommand("INSERT INTO BAZA(field1, field2, field3, field4) VALUES (1, 2, 3, 4)");
+            con.Open();
+            Ins.ExecuteNonQuery();
+            con.Close();
         }
     }
 }
