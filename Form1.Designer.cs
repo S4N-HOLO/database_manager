@@ -36,6 +36,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,11 +79,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(640, 99);
+            this.button3.Location = new System.Drawing.Point(602, 99);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(164, 23);
             this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
+            this.button3.Text = "get columns name";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.columnsname);
             // 
@@ -109,11 +111,30 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.openfile);
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(602, 128);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(164, 23);
+            this.button6.TabIndex = 7;
+            this.button6.Text = "get quantiy of rows";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.test1);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(603, 158);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(967, 514);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
@@ -126,6 +147,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -139,6 +161,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

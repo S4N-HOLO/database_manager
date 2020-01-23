@@ -20,8 +20,8 @@ namespace datagridview_and_database
         private string fileName = "C:\\Users\\Tommy\\Desktop\\BAZA.mdb";
 
         private string con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
+        
 
-        OleDbConnection con = new OleDbConnection(con_path);
 
         OleDbDataAdapter da = new OleDbDataAdapter();
         BindingSource bs = new BindingSource();
@@ -39,6 +39,8 @@ namespace datagridview_and_database
         
         private void Form1_Load(object sender, EventArgs e)
         {
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+
             con.Open();
             da = new OleDbDataAdapter("select*from baza", con);
             ds = new DataSet();
@@ -53,8 +55,9 @@ namespace datagridview_and_database
 
         private void test(object sender, EventArgs e)
         {
-           
-           OleDbCommand Ins = new OleDbCommand("INSERT INTO BAZA(field1, field2, field3, field4) VALUES (1, 2, 3, 4)", con);
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+
+            OleDbCommand Ins = new OleDbCommand("INSERT INTO BAZA(field1, field2, field3, field4) VALUES (1, 2, 3, 4)", con);
             con.Open();
             Ins.ExecuteNonQuery();
             con.Close();
@@ -63,6 +66,8 @@ namespace datagridview_and_database
 
         private void update_dgv(object sender, EventArgs e)
         {
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+
             OleDbCommand refresh = new OleDbCommand("select*from baza", con);
             
             dataGridView1.DataSource = null;
@@ -76,15 +81,22 @@ namespace datagridview_and_database
 
         private void save_data_to_db(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows[curr_Row + 1].Cells[1] == null &&
-                dataGridView1.Rows[curr_Row + 1].Cells[2] == null &&
-                 dataGridView1.Rows[curr_Row + 1].Cells[2] == null &&
-                  dataGridView1.Rows[curr_Row + 1].Cells[2] == null)
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+
+            if (dataGridView1.Rows[curr_Row].Cells[1] == null &&
+                dataGridView1.Rows[curr_Row].Cells[2] == null &&
+                 dataGridView1.Rows[curr_Row].Cells[3] == null &&
+                  dataGridView1.Rows[curr_Row].Cells[4] == null)
+            {
+                return;
+            }
+            else if (dataGridView1.Rows[curr_Row] == null)
             {
                 return;
             }
             else
             {
+
                 OleDbCommand save = new OleDbCommand(save_string, con);
                 con.Open();
                 save.ExecuteNonQuery();
@@ -94,6 +106,8 @@ namespace datagridview_and_database
 
         private void columnsname(object sender, EventArgs e)
         {
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+
             string showcolumns_string = "select * from BAZA.COLUMNS where TABLE_NAME = 'baza'";
             OleDbCommand showcolumns = new OleDbCommand(showcolumns_string, con);
             con.Open();
@@ -118,5 +132,14 @@ namespace datagridview_and_database
 
             MessageBox.Show(fileName);
         }
+
+        private void test1(object sender, EventArgs e)
+        {
+            textBox1.Text = curr_Row.ToString();
+
+
+
+        }
+       
     }
 }
