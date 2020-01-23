@@ -30,7 +30,7 @@ namespace datagridview_and_database
 
         int curr_Row = int.MaxValue;
 
-        private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values('','','','')";
+        private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
         public Form1()
         {
             InitializeComponent();
@@ -56,8 +56,8 @@ namespace datagridview_and_database
         private void test(object sender, EventArgs e)
         {
             OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
-
-            OleDbCommand Ins = new OleDbCommand("INSERT INTO BAZA(field1, field2, field3, field4) VALUES (1, 2, 3, 4)", con);
+            string temp = save_string + "(1, 2, 3, 6)";
+            OleDbCommand Ins = new OleDbCommand(save_string, con);
             con.Open();
             Ins.ExecuteNonQuery();
             con.Close();
