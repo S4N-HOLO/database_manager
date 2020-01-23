@@ -10,13 +10,18 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Data.Odbc;
 using System.Data.Sql;
+using System.Windows.Forms.VisualStyles;
 
 
 namespace datagridview_and_database
 {
     public partial class Form1 : Form
     {
-        OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=C:\\Users\\Tommy\\Desktop\\BAZA.mdb");
+        private string fileName = "C:\\Users\\Tommy\\Desktop\\BAZA.mdb";
+
+        private string con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
+
+        OleDbConnection con = new OleDbConnection(con_path);
 
         OleDbDataAdapter da = new OleDbDataAdapter();
         BindingSource bs = new BindingSource();
@@ -25,7 +30,7 @@ namespace datagridview_and_database
 
         int curr_Row = int.MaxValue;
 
-        string save_string = "INSERT INTO baza(field1, field2, field3, field4) values('','','','')";
+        private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values('','','','')";
         public Form1()
         {
             InitializeComponent();
@@ -46,7 +51,7 @@ namespace datagridview_and_database
         }
 
 
-        private void refresh(object sender, EventArgs e)
+        private void test(object sender, EventArgs e)
         {
            
            OleDbCommand Ins = new OleDbCommand("INSERT INTO BAZA(field1, field2, field3, field4) VALUES (1, 2, 3, 4)", con);
@@ -85,6 +90,33 @@ namespace datagridview_and_database
                 save.ExecuteNonQuery();
                 con.Close();
             }
+        }
+
+        private void columnsname(object sender, EventArgs e)
+        {
+            string showcolumns_string = "select * from BAZA.COLUMNS where TABLE_NAME = 'baza'";
+            OleDbCommand showcolumns = new OleDbCommand(showcolumns_string, con);
+            con.Open();
+            string temp = showcolumns.ExecuteNonQuery().ToString();
+
+            MessageBox.Show(temp);
+            con.Close();
+        }
+
+        private void openfile(object sender, EventArgs e)
+        {
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "db files (*.mdb)|*mdb|ll files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                fileName = openFileDialog1.FileName;
+            }
+
+            MessageBox.Show(fileName);
         }
     }
 }
