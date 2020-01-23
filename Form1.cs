@@ -21,6 +21,11 @@ namespace datagridview_and_database
         OleDbDataAdapter da = new OleDbDataAdapter();
         BindingSource bs = new BindingSource();
         DataSet ds = new DataSet();
+
+
+        int curr_Row = int.MaxValue;
+
+        string save_string = "INSERT INTO baza(field1, field2, field3, field4) values('','','','')";
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +40,8 @@ namespace datagridview_and_database
             da.Fill(ds);
             bs = new BindingSource(ds, ds.Tables[0].TableName);
             dataGridView1.DataSource = bs;
+            curr_Row = dataGridView1.Rows.Count - 1;
+            MessageBox.Show(curr_Row.ToString());
             con.Close();
         }
 
@@ -60,6 +67,24 @@ namespace datagridview_and_database
             bs = new BindingSource(ds, ds.Tables[0].TableName);
             dataGridView1.DataSource = bs;
             con.Close();
+        }
+
+        private void save_data_to_db(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows[curr_Row + 1].Cells[1] == null &&
+                dataGridView1.Rows[curr_Row + 1].Cells[2] == null &&
+                 dataGridView1.Rows[curr_Row + 1].Cells[2] == null &&
+                  dataGridView1.Rows[curr_Row + 1].Cells[2] == null)
+            {
+                return;
+            }
+            else
+            {
+                OleDbCommand save = new OleDbCommand(save_string, con);
+                con.Open();
+                save.ExecuteNonQuery();
+                con.Close();
+            }
         }
     }
 }
