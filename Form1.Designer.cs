@@ -40,7 +40,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,9 +67,9 @@
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(1081, 126);
+            this.checkedListBox1.Location = new System.Drawing.Point(948, 41);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(147, 109);
+            this.checkedListBox1.Size = new System.Drawing.Size(251, 109);
             this.checkedListBox1.TabIndex = 2;
             // 
             // button2
@@ -106,9 +107,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(928, 137);
+            this.button5.Location = new System.Drawing.Point(758, 242);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(164, 23);
             this.button5.TabIndex = 6;
             this.button5.Text = "open db";
             this.button5.UseVisualStyleBackColor = true;
@@ -133,11 +134,11 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(978, 401);
+            this.button7.Location = new System.Drawing.Point(758, 213);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.Size = new System.Drawing.Size(164, 23);
             this.button7.TabIndex = 9;
-            this.button7.Text = "button7";
+            this.button7.Text = "get colun names";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.get_column_name);
             // 
@@ -151,20 +152,31 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.Form1_Load);
             // 
-            // listBox1
+            // checkedListBox2
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(1081, 12);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(236, 108);
-            this.listBox1.TabIndex = 11;
+            this.checkedListBox2.FormattingEnabled = true;
+            this.checkedListBox2.Location = new System.Drawing.Point(1223, 41);
+            this.checkedListBox2.Name = "checkedListBox2";
+            this.checkedListBox2.Size = new System.Drawing.Size(278, 109);
+            this.checkedListBox2.TabIndex = 11;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(759, 271);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(163, 23);
+            this.button9.TabIndex = 12;
+            this.button9.Text = "get path to db\'s";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.listBox1_Enter);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1513, 514);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.checkedListBox2);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.textBox1);
@@ -198,7 +210,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.Button button9;
     }
 }
 

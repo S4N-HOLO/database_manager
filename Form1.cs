@@ -29,6 +29,9 @@ namespace datagridview_and_database
 
         private string con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
 
+        string[] bdnames = new string[10];
+        private int start_index = 0;
+
 
 
 
@@ -119,7 +122,7 @@ namespace datagridview_and_database
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                fileName = openFileDialog1.FileName;
+                checkedListBox2.Items.Add(openFileDialog1.FileName);
             }
 
             MessageBox.Show(fileName);
@@ -157,5 +160,11 @@ namespace datagridview_and_database
 
            
         } // получаем названия столбцов и закидываем их в секедлистбокс
+
+        private void listBox1_Enter(object sender, EventArgs e)
+        {
+            string temp = checkedListBox2.CheckedItems.ToString();
+            MessageBox.Show(temp);
+        }
     }
 }
