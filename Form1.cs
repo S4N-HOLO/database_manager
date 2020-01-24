@@ -34,6 +34,8 @@ namespace datagridview_and_database
 
         private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
 
+        private string column_name_sql = "SELECT COLUMN_NAME FROM COLUMNS WHERE TABLE_SCHEMA = 'BAZA' AND TABLE_NAME='baza'; ";
+
 
         public Form1()
         {
@@ -148,6 +150,24 @@ namespace datagridview_and_database
             else
                 MessageBox.Show("ты не заполнил все строки");
             textBox1.Text = curr_Row.ToString();
+        }
+
+        private void get_column_name(object sender, EventArgs e)
+        {
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+            con.Open();
+            DataTable dataTable = new DataTable();
+            da.Fill(dataTable);
+            con.Close();
+            foreach (var item in dataTable.Columns)
+            {
+                listBox1.Items.Add(item.ToString());
+            }
+
+
+
+
+           
         }
     }
 }
