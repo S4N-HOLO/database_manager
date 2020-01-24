@@ -66,7 +66,7 @@
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(928, 12);
+            this.checkedListBox1.Location = new System.Drawing.Point(1081, 126);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(147, 109);
             this.checkedListBox1.TabIndex = 2;
@@ -89,7 +89,6 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "get columns name";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.columnsname);
             // 
             // button4
             // 

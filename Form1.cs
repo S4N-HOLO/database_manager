@@ -18,11 +18,18 @@ namespace datagridview_and_database
 {
     public partial class Form1 : Form
     {
+       
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private string fileName = "C:\\Users\\Tommy\\Desktop\\BAZA.mdb";
 
         private string con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
 
-        
+
 
 
         OleDbDataAdapter da = new OleDbDataAdapter();
@@ -34,18 +41,13 @@ namespace datagridview_and_database
 
         private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
 
-        private string column_name_sql = "SELECT COLUMN_NAME FROM COLUMNS WHERE TABLE_SCHEMA = 'BAZA' AND TABLE_NAME='baza'; ";
 
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
-      
-        
         private void Form1_Load(object sender, EventArgs e)
         {
             string temp = con_path_mask + fileName;
+
+
             OleDbConnection con = new OleDbConnection(temp);
 
             con.Open();
@@ -57,7 +59,7 @@ namespace datagridview_and_database
             curr_Row = dataGridView1.Rows.Count;
             MessageBox.Show(curr_Row.ToString());
             con.Close();
-        }
+        } //добавление данных из дб БАЗА в дгв
 
        
         private void test(object sender, EventArgs e)
@@ -68,8 +70,7 @@ namespace datagridview_and_database
             con.Open();
             Ins.ExecuteNonQuery();
             con.Close();
-        }
-
+        } //добавление тестовой строки
 
         private void update_dgv(object sender, EventArgs e)
         {
@@ -84,7 +85,7 @@ namespace datagridview_and_database
             bs = new BindingSource(ds, ds.Tables[0].TableName);
             dataGridView1.DataSource = bs;
             con.Close();
-        }
+        } //обновление дгв
 
         private void save_data_to_db(object sender, EventArgs e)
         {
@@ -106,20 +107,7 @@ namespace datagridview_and_database
                 save.ExecuteNonQuery();
                 con.Close();
             }
-        }
-
-        private void columnsname(object sender, EventArgs e)
-        {
-            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
-
-            string showcolumns_string = "select * from BAZA.COLUMNS where TABLE_NAME = 'baza'";
-            OleDbCommand showcolumns = new OleDbCommand(showcolumns_string, con);
-            con.Open();
-            string temp = showcolumns.ExecuteNonQuery().ToString();
-
-            MessageBox.Show(temp);
-            con.Close();
-        }
+        } //сейв в дб
 
         private void openfile(object sender, EventArgs e)
         {
@@ -135,9 +123,9 @@ namespace datagridview_and_database
             }
 
             MessageBox.Show(fileName);
-        }
+        } //откдываем дб из локальных файлов по пути 
 
-        private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString();
+        private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб
 
         private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
@@ -150,7 +138,7 @@ namespace datagridview_and_database
             else
                 MessageBox.Show("ты не заполнил все строки");
             textBox1.Text = curr_Row.ToString();
-        }
+        } //на самом деле в душе не ебу что оно должно делать, но вроде как при спадении фокуса добавляет строку с переменную со строками
 
         private void get_column_name(object sender, EventArgs e)
         {
@@ -161,13 +149,13 @@ namespace datagridview_and_database
             con.Close();
             foreach (var item in dataTable.Columns)
             {
-                listBox1.Items.Add(item.ToString());
+                checkedListBox1.Items.Add(item.ToString());
             }
 
 
 
 
            
-        }
+        } // получаем названия столбцов и закидываем их в секедлистбокс
     }
 }
