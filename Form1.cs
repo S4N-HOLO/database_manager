@@ -11,6 +11,7 @@ using System.Data.OleDb;
 using System.Data.Odbc;
 using System.Data.Sql;
 using System.Windows.Forms.VisualStyles;
+using System.IO;
 
 
 namespace datagridview_and_database
@@ -20,6 +21,7 @@ namespace datagridview_and_database
         private string fileName = "C:\\Users\\Tommy\\Desktop\\BAZA.mdb";
 
         private string con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
+
         
 
 
@@ -31,6 +33,8 @@ namespace datagridview_and_database
         int curr_Row = int.MaxValue;
 
         private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
+
+
         public Form1()
         {
             InitializeComponent();
@@ -39,7 +43,8 @@ namespace datagridview_and_database
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+            string temp = con_path_mask + fileName;
+            OleDbConnection con = new OleDbConnection(temp);
 
             con.Open();
             da = new OleDbDataAdapter("select*from baza", con);
@@ -47,12 +52,12 @@ namespace datagridview_and_database
             da.Fill(ds);
             bs = new BindingSource(ds, ds.Tables[0].TableName);
             dataGridView1.DataSource = bs;
-            curr_Row = dataGridView1.Rows.Count - 1;
+            curr_Row = dataGridView1.Rows.Count;
             MessageBox.Show(curr_Row.ToString());
             con.Close();
         }
 
-
+       
         private void test(object sender, EventArgs e)
         {
             OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
@@ -86,18 +91,15 @@ namespace datagridview_and_database
             if (dataGridView1.Rows[curr_Row].Cells[1] == null &&
                 dataGridView1.Rows[curr_Row].Cells[2] == null &&
                  dataGridView1.Rows[curr_Row].Cells[3] == null &&
-                  dataGridView1.Rows[curr_Row].Cells[4] == null)
+                  dataGridView1.Rows[curr_Row].Cells[4] == null )
             {
                 return;
             }
-            else if (dataGridView1.Rows[curr_Row] == null)
-            {
-                return;
-            }
+           
             else
             {
-
-                OleDbCommand save = new OleDbCommand(save_string, con);
+                string temp = save_string + "('"+ dataGridView1.Rows[curr_Row].Cells[1]+"', 2, 3, test)";
+                OleDbCommand save = new OleDbCommand(temp, con);
                 con.Open();
                 save.ExecuteNonQuery();
                 con.Close();
@@ -133,13 +135,19 @@ namespace datagridview_and_database
             MessageBox.Show(fileName);
         }
 
-        private void test1(object sender, EventArgs e)
+        private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString();
+
+        private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
+            int temp = curr_Row++;
+            if (dataGridView1.Rows[temp].Cells[1] != null &&
+                dataGridView1.Rows[temp].Cells[2] != null &&
+                dataGridView1.Rows[temp].Cells[3] != null &&
+                dataGridView1.Rows[temp].Cells[4] != null)
+                curr_Row++;
+            else
+                MessageBox.Show("ты не заполнил все строки");
             textBox1.Text = curr_Row.ToString();
-
-
-
         }
-       
     }
 }
