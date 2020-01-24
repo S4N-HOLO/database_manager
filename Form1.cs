@@ -44,7 +44,8 @@ namespace datagridview_and_database
 
         private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
 
-
+        private string table_name_sql =
+            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -59,7 +60,7 @@ namespace datagridview_and_database
             da.Fill(ds);
             bs = new BindingSource(ds, ds.Tables[0].TableName);
             dataGridView1.DataSource = bs;
-            curr_Row = dataGridView1.Rows.Count;
+            curr_Row = dataGridView1.Rows.Count-1;
             MessageBox.Show(curr_Row.ToString());
             con.Close();
         } //добавление данных из дб БАЗА в дгв
@@ -68,7 +69,7 @@ namespace datagridview_and_database
         private void test(object sender, EventArgs e)
         {
             OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
-            string temp = save_string + "(1, 2, 3, 6)";
+            string temp = save_string + " (1, 2, 3, 6)";
             OleDbCommand Ins = new OleDbCommand(save_string, con);
             con.Open();
             Ins.ExecuteNonQuery();
@@ -94,22 +95,29 @@ namespace datagridview_and_database
         {
             OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
 
-            if (dataGridView1.Rows[curr_Row].Cells[1] == null &&
-                dataGridView1.Rows[curr_Row].Cells[2] == null &&
-                 dataGridView1.Rows[curr_Row].Cells[3] == null &&
-                  dataGridView1.Rows[curr_Row].Cells[4] == null )
-            {
-                return;
-            }
            
-            else
-            {
-                string temp = save_string + "('"+ dataGridView1.Rows[curr_Row].Cells[1]+"', 2, 3, test)";
-                OleDbCommand save = new OleDbCommand(temp, con);
-                con.Open();
-                save.ExecuteNonQuery();
-                con.Close();
-            }
+                for (curr_Row += 1; curr_Row != dataGridView1.Rows.Count-1; curr_Row++)
+                {
+                    if (dataGridView1.Rows[curr_Row].Cells[1] == null &&
+                        dataGridView1.Rows[curr_Row].Cells[2] == null &&
+                        dataGridView1.Rows[curr_Row].Cells[3] == null &&
+                        dataGridView1.Rows[curr_Row].Cells[4] == null)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        string temp = save_string + "('" + dataGridView1.Rows[curr_Row].Cells[1] + "', 2, 3, test)";
+                        OleDbCommand save = new OleDbCommand(temp, con);
+                        con.Open();
+                        save.ExecuteNonQuery();
+                        con.Close();
+                    }
+
+                }
+
+
+
         } //сейв в дб
 
         private void openfile(object sender, EventArgs e)
@@ -165,6 +173,29 @@ namespace datagridview_and_database
         {
             string temp = checkedListBox2.CheckedItems.ToString();
             MessageBox.Show(temp);
+        }
+
+        private void tablenames_from_db(object sender, EventArgs e)
+        {
+
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+            con.Open();
+            DataTable _This_DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
+            List<String> _This_TableNameList = new List<string>();
+            _This_TableNameList.AddRange(from DataRow item in _This_DataBaseTables.Rows select item["TABLE_NAME"].ToString());
+            String Result = String.Empty;
+            foreach (String Data in _This_TableNameList) Result += Data.ToString() + "\n";
+            MessageBox.Show(Result);
+            con.Close();
+            //OleDbCommand select_table_name = new OleDbCommand(table_name_sql, con);
+            //con.Open();
+            //DataTable dataTable = new DataTable();
+            //da.Fill(dataTable);
+            //con.Close();
+            //foreach (var item in )
+            //{
+            //    checkedListBox1.Items.Add(item.ToString());
+            //}
         }
     }
 }
