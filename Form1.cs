@@ -55,7 +55,7 @@ namespace datagridview_and_database
             OleDbConnection con = new OleDbConnection(temp);
 
             con.Open();
-            da = new OleDbDataAdapter("select*from baza", con);
+            da = new OleDbDataAdapter("select*from test", con);
             ds = new DataSet();
             da.Fill(ds);
             bs = new BindingSource(ds, ds.Tables[0].TableName);
@@ -80,7 +80,7 @@ namespace datagridview_and_database
         {
             OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
 
-            OleDbCommand refresh = new OleDbCommand("select*from baza", con);
+            OleDbCommand refresh = new OleDbCommand("select*from test", con);
             
             dataGridView1.DataSource = null;
             con.Open();
@@ -134,6 +134,7 @@ namespace datagridview_and_database
             }
 
             MessageBox.Show(fileName);
+            button8.Enabled = true;
         } //откдываем дб из локальных файлов по пути 
 
         private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб
@@ -187,15 +188,6 @@ namespace datagridview_and_database
             foreach (String Data in _This_TableNameList) Result += Data.ToString() + "\n";
             MessageBox.Show(Result);
             con.Close();
-            //OleDbCommand select_table_name = new OleDbCommand(table_name_sql, con);
-            //con.Open();
-            //DataTable dataTable = new DataTable();
-            //da.Fill(dataTable);
-            //con.Close();
-            //foreach (var item in )
-            //{
-            //    checkedListBox1.Items.Add(item.ToString());
-            //}
         }
     }
 }
