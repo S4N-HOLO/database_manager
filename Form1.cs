@@ -95,7 +95,10 @@ namespace datagridview_and_database
             {
                 db_path_strings.Items.Add(open_db_file_dialog.FileName);
                 fileName = open_db_file_dialog.FileName;
+                button6.Enabled = true;
+                button7.Enabled = true;
                 button8.Enabled = true;
+                button10.Enabled = true;
             }
 
             
@@ -138,23 +141,37 @@ namespace datagridview_and_database
 
         private void tablenames_from_db(object sender, EventArgs e)
         {
-
-            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
-            con.Open();
-            DataTable _This_DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
-            List<String> _This_TableNameList = new List<string>();
-            _This_TableNameList.AddRange(from DataRow item in _This_DataBaseTables.Rows select item["TABLE_NAME"].ToString());
-            String Result = String.Empty;
-            for (var index = 0; index < _This_TableNameList.Count; index++)
+            foreach (var VARIABLE in db_path_strings.CheckedItems)
             {
+                OleDbConnection con = new OleDbConnection(con_path_mask + VARIABLE);
+                //string test = con_path_mask + VARIABLE;
+                //MessageBox.Show(test);
+                con.Open();
+                DataTable _This_DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
+                List<String> _This_TableNameList = new List<string>();
+                _This_TableNameList.AddRange(from DataRow item in _This_DataBaseTables.Rows select item["TABLE_NAME"].ToString());
+                String Result = String.Empty;
+                for (var index = 0; index < _This_TableNameList.Count; index++)
+                {
 
-                String Data = _This_TableNameList[index];
-                db_tables_names.Items.Add(Data);
-                Result += Data.ToString() + "\n";
+                    String Data = _This_TableNameList[index];
+                    db_tables_names.Items.Add(Data);
+                    Result += Data.ToString() + "\n";
+                }
+
+                MessageBox.Show(Result);
+                con.Close();
             }
+           
+        } //получаем названия таблиц
 
-            MessageBox.Show(Result);
-            con.Close();
+
+        private void db_path_strings_checked(object sender, EventArgs e)
+        {
+            foreach (var VARIABLE in db_path_strings.CheckedIndices)
+            {
+                
+            }
         }
     }
 }

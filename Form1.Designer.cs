@@ -54,7 +54,7 @@
             // db_tables_cellnames
             // 
             this.db_tables_cellnames.FormattingEnabled = true;
-            this.db_tables_cellnames.Location = new System.Drawing.Point(948, 13);
+            this.db_tables_cellnames.Location = new System.Drawing.Point(948, 12);
             this.db_tables_cellnames.Name = "db_tables_cellnames";
             this.db_tables_cellnames.Size = new System.Drawing.Size(278, 109);
             this.db_tables_cellnames.TabIndex = 2;
@@ -75,6 +75,7 @@
             // 
             // button6
             // 
+            this.button6.Enabled = false;
             this.button6.Location = new System.Drawing.Point(766, 77);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(164, 23);
@@ -92,6 +93,7 @@
             // 
             // button7
             // 
+            this.button7.Enabled = false;
             this.button7.Location = new System.Drawing.Point(767, 213);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(164, 23);
@@ -114,7 +116,7 @@
             // db_path_strings
             // 
             this.db_path_strings.FormattingEnabled = true;
-            this.db_path_strings.Location = new System.Drawing.Point(948, 390);
+            this.db_path_strings.Location = new System.Drawing.Point(948, 393);
             this.db_path_strings.Name = "db_path_strings";
             this.db_path_strings.Size = new System.Drawing.Size(278, 109);
             this.db_path_strings.TabIndex = 11;
@@ -129,6 +131,7 @@
             // 
             // button10
             // 
+            this.button10.Enabled = false;
             this.button10.Location = new System.Drawing.Point(767, 184);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(164, 23);
