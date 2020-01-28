@@ -86,18 +86,18 @@ namespace datagridview_and_database
         private void openfile(object sender, EventArgs e)
         {
 
-            openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "db files (*.mdb)|*mdb|ll files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 2;
-            openFileDialog1.RestoreDirectory = true;
+            open_db_file_dialog.InitialDirectory = "c:\\";
+            open_db_file_dialog.Filter = "db files (*.mdb)|*mdb|ll files (*.*)|*.*";
+            open_db_file_dialog.FilterIndex = 2;
+            open_db_file_dialog.RestoreDirectory = true;
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (open_db_file_dialog.ShowDialog() == DialogResult.OK)
             {
-                checkedListBox2.Items.Add(openFileDialog1.FileName);
+                db_path_strings.Items.Add(open_db_file_dialog.FileName);
+                button8.Enabled = true;
             }
 
-            MessageBox.Show(fileName);
-            button8.Enabled = true;
+            
         } //откдываем дб из локальных файлов по пути 
 
         private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб

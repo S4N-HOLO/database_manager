@@ -30,13 +30,13 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.open_db_file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.db_path_strings = new System.Windows.Forms.CheckedListBox();
             this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
             this.button10 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,9 +60,9 @@
             this.checkedListBox1.Size = new System.Drawing.Size(278, 109);
             this.checkedListBox1.TabIndex = 2;
             // 
-            // openFileDialog1
+            // open_db_file_dialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.open_db_file_dialog.FileName = "open_db_file_dialog";
             // 
             // button5
             // 
@@ -112,13 +112,13 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.add_data_from_table_to_dgv);
             // 
-            // checkedListBox2
+            // db_path_strings
             // 
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(948, 390);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(278, 109);
-            this.checkedListBox2.TabIndex = 11;
+            this.db_path_strings.FormattingEnabled = true;
+            this.db_path_strings.Location = new System.Drawing.Point(948, 390);
+            this.db_path_strings.Name = "db_path_strings";
+            this.db_path_strings.Size = new System.Drawing.Size(278, 109);
+            this.db_path_strings.TabIndex = 11;
             // 
             // checkedListBox3
             // 
@@ -155,7 +155,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.checkedListBox3);
-            this.Controls.Add(this.checkedListBox2);
+            this.Controls.Add(this.db_path_strings);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.textBox1);
@@ -174,13 +174,13 @@
         #endregion
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog open_db_file_dialog;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.CheckedListBox db_path_strings;
         private System.Windows.Forms.CheckedListBox checkedListBox3;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label1;
