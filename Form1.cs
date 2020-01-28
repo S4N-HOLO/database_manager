@@ -25,29 +25,28 @@ namespace datagridview_and_database
             InitializeComponent();
         }
 
-        private string fileName = "C:\\Users\\Tommy\\Desktop\\BAZA.mdb";
+        private string fileName = "C:\\";
 
         private string con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
-
-        string[] bdnames = new string[10];
-        private int start_index = 0;
-
-
-
 
         OleDbDataAdapter da = new OleDbDataAdapter();
         BindingSource bs = new BindingSource();
         DataSet ds = new DataSet();
 
-
         int curr_Row = int.MaxValue;
+
+
+
+       
+
+       
 
         private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
 
         private string table_name_sql =
             "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'";
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void add_data_from_table_to_dgv(object sender, EventArgs e)
         {
             string temp = con_path_mask + fileName;
 
@@ -66,15 +65,7 @@ namespace datagridview_and_database
         } //добавление данных из дб БАЗА в дгв
 
        
-        private void test(object sender, EventArgs e)
-        {
-            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
-            string temp = save_string + " (1, 2, 3, 6)";
-            OleDbCommand Ins = new OleDbCommand(save_string, con);
-            con.Open();
-            Ins.ExecuteNonQuery();
-            con.Close();
-        } //добавление тестовой строки
+   
 
         private void update_dgv(object sender, EventArgs e)
         {
@@ -91,34 +82,6 @@ namespace datagridview_and_database
             con.Close();
         } //обновление дгв
 
-        private void save_data_to_db(object sender, EventArgs e)
-        {
-            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
-
-           
-                for (curr_Row += 1; curr_Row != dataGridView1.Rows.Count-1; curr_Row++)
-                {
-                    if (dataGridView1.Rows[curr_Row].Cells[1] == null &&
-                        dataGridView1.Rows[curr_Row].Cells[2] == null &&
-                        dataGridView1.Rows[curr_Row].Cells[3] == null &&
-                        dataGridView1.Rows[curr_Row].Cells[4] == null)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        string temp = save_string + "('" + dataGridView1.Rows[curr_Row].Cells[1] + "', 2, 3, test)";
-                        OleDbCommand save = new OleDbCommand(temp, con);
-                        con.Open();
-                        save.ExecuteNonQuery();
-                        con.Close();
-                    }
-
-                }
-
-
-
-        } //сейв в дб
 
         private void openfile(object sender, EventArgs e)
         {
@@ -170,11 +133,7 @@ namespace datagridview_and_database
            
         } // получаем названия столбцов и закидываем их в секедлистбокс
 
-        private void listBox1_Enter(object sender, EventArgs e)
-        {
-            string temp = checkedListBox2.CheckedItems.ToString();
-            MessageBox.Show(temp);
-        }
+       
 
         private void tablenames_from_db(object sender, EventArgs e)
         {
