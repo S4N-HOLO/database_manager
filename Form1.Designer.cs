@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.db_tables_cellnames = new System.Windows.Forms.CheckedListBox();
             this.open_db_file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -37,7 +37,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.db_path_strings = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
+            this.db_tables_names = new System.Windows.Forms.CheckedListBox();
             this.button10 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -50,15 +50,14 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(740, 490);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView1_UserAddedRow);
             // 
-            // checkedListBox1
+            // db_tables_cellnames
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(948, 13);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(278, 109);
-            this.checkedListBox1.TabIndex = 2;
+            this.db_tables_cellnames.FormattingEnabled = true;
+            this.db_tables_cellnames.Location = new System.Drawing.Point(948, 13);
+            this.db_tables_cellnames.Name = "db_tables_cellnames";
+            this.db_tables_cellnames.Size = new System.Drawing.Size(278, 109);
+            this.db_tables_cellnames.TabIndex = 2;
             // 
             // open_db_file_dialog
             // 
@@ -120,13 +119,13 @@
             this.db_path_strings.Size = new System.Drawing.Size(278, 109);
             this.db_path_strings.TabIndex = 11;
             // 
-            // checkedListBox3
+            // db_tables_names
             // 
-            this.checkedListBox3.FormattingEnabled = true;
-            this.checkedListBox3.Location = new System.Drawing.Point(948, 184);
-            this.checkedListBox3.Name = "checkedListBox3";
-            this.checkedListBox3.Size = new System.Drawing.Size(278, 109);
-            this.checkedListBox3.TabIndex = 13;
+            this.db_tables_names.FormattingEnabled = true;
+            this.db_tables_names.Location = new System.Drawing.Point(948, 184);
+            this.db_tables_names.Name = "db_tables_names";
+            this.db_tables_names.Size = new System.Drawing.Size(278, 109);
+            this.db_tables_names.TabIndex = 13;
             // 
             // button10
             // 
@@ -154,14 +153,14 @@
             this.ClientSize = new System.Drawing.Size(1242, 514);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button10);
-            this.Controls.Add(this.checkedListBox3);
+            this.Controls.Add(this.db_tables_names);
             this.Controls.Add(this.db_path_strings);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.db_tables_cellnames);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -173,7 +172,7 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox db_tables_cellnames;
         private System.Windows.Forms.OpenFileDialog open_db_file_dialog;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
@@ -181,7 +180,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckedListBox db_path_strings;
-        private System.Windows.Forms.CheckedListBox checkedListBox3;
+        private System.Windows.Forms.CheckedListBox db_tables_names;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label1;
     }

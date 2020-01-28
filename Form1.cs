@@ -124,7 +124,7 @@ namespace datagridview_and_database
             con.Close();
             foreach (var item in dataTable.Columns)
             {
-                checkedListBox1.Items.Add(item.ToString());
+                db_tables_cellnames.Items.Add(item.ToString());
             }
 
 
@@ -144,7 +144,14 @@ namespace datagridview_and_database
             List<String> _This_TableNameList = new List<string>();
             _This_TableNameList.AddRange(from DataRow item in _This_DataBaseTables.Rows select item["TABLE_NAME"].ToString());
             String Result = String.Empty;
-            foreach (String Data in _This_TableNameList) Result += Data.ToString() + "\n";
+            for (var index = 1; index < _This_TableNameList.Count; index++)
+            {
+
+                String Data = _This_TableNameList[index];
+                db_tables_names.Items.Add(Data);
+                Result += Data.ToString() + "\n";
+            }
+
             MessageBox.Show(Result);
             con.Close();
         }
