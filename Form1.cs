@@ -94,6 +94,7 @@ namespace datagridview_and_database
             if (open_db_file_dialog.ShowDialog() == DialogResult.OK)
             {
                 db_path_strings.Items.Add(open_db_file_dialog.FileName);
+                fileName = open_db_file_dialog.FileName;
                 button8.Enabled = true;
             }
 
@@ -144,7 +145,7 @@ namespace datagridview_and_database
             List<String> _This_TableNameList = new List<string>();
             _This_TableNameList.AddRange(from DataRow item in _This_DataBaseTables.Rows select item["TABLE_NAME"].ToString());
             String Result = String.Empty;
-            for (var index = 1; index < _This_TableNameList.Count; index++)
+            for (var index = 0; index < _This_TableNameList.Count; index++)
             {
 
                 String Data = _This_TableNameList[index];
