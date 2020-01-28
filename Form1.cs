@@ -41,10 +41,10 @@ namespace datagridview_and_database
 
        
 
-        private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
+            /* private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
 
         private string table_name_sql =
-            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'";
+            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'";*/
 
         private void add_data_from_table_to_dgv(object sender, EventArgs e)
         {
