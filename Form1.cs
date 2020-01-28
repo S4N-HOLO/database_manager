@@ -18,7 +18,7 @@ namespace datagridview_and_database
 {
     public partial class Form1 : Form
     {
-       
+        //
 
         public Form1()
         {
