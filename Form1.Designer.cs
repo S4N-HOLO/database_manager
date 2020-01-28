@@ -110,11 +110,11 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(767, 242);
+            this.button5.Location = new System.Drawing.Point(766, 460);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(164, 23);
             this.button5.TabIndex = 6;
-            this.button5.Text = "open db";
+            this.button5.Text = "Загрузить дб в список";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.openfile);
             // 
@@ -148,7 +148,7 @@
             // button8
             // 
             this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(768, 184);
+            this.button8.Location = new System.Drawing.Point(767, 431);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(163, 23);
             this.button8.TabIndex = 10;
