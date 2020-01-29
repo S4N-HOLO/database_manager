@@ -33,7 +33,6 @@
             this.open_db_file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.db_path_strings = new System.Windows.Forms.CheckedListBox();
@@ -84,13 +83,6 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.test1);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(767, 106);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(163, 20);
-            this.textBox1.TabIndex = 8;
-            // 
             // button7
             // 
             this.button7.Enabled = false;
@@ -98,7 +90,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(164, 23);
             this.button7.TabIndex = 9;
-            this.button7.Text = "get colun names";
+            this.button7.Text = "get column names";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.get_column_name);
             // 
@@ -160,7 +152,6 @@
             this.Controls.Add(this.db_path_strings);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.db_tables_cellnames);
@@ -179,7 +170,6 @@
         private System.Windows.Forms.OpenFileDialog open_db_file_dialog;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckedListBox db_path_strings;
