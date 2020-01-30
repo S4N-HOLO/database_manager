@@ -18,7 +18,6 @@ namespace datagridview_and_database
 {
     public partial class Form1 : Form
     {
-        //
 
         public Form1()
         {
@@ -54,7 +53,7 @@ namespace datagridview_and_database
             OleDbConnection con = new OleDbConnection(temp);
 
             con.Open();
-            da = new OleDbDataAdapter("select*from test", con);
+            da = new OleDbDataAdapter("select*from Группы", con);
             ds = new DataSet();
             da.Fill(ds);
             bs = new BindingSource(ds, ds.Tables[0].TableName);
@@ -104,7 +103,7 @@ namespace datagridview_and_database
             
         } //откдываем дб из локальных файлов по пути 
 
-        private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб
+        //private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб
 
         private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
@@ -116,17 +115,28 @@ namespace datagridview_and_database
                 curr_Row++;
             else
                 MessageBox.Show("ты не заполнил все строки");
-            textBox1.Text = curr_Row.ToString();
+            //textBox1.Text = curr_Row.ToString();
         } //на самом деле в душе не ебу что оно должно делать, но вроде как при спадении фокуса добавляет строку с переменную со строками
 
         private void get_column_name(object sender, EventArgs e)
         {
-            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+           
+            string temp = con_path_mask + fileName;
+            OleDbConnection con = new OleDbConnection(temp);
             con.Open();
-            DataTable dataTable = new DataTable();
-            da.Fill(dataTable);
+
+
+
+             da = new OleDbDataAdapter("select*from Группы", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            bs = new BindingSource(ds, ds.Tables[0].TableName);
+
+           ;
+            DataTable dataTables = new DataTable();
+            da.Fill(dataTables);
             con.Close();
-            foreach (var item in dataTable.Columns)
+            foreach (var item in dataTables.Columns)
             {
                 db_tables_cellnames.Items.Add(item.ToString());
             }
@@ -144,22 +154,25 @@ namespace datagridview_and_database
             foreach (var VARIABLE in db_path_strings.CheckedItems)
             {
                 OleDbConnection con = new OleDbConnection(con_path_mask + VARIABLE);
-                //string test = con_path_mask + VARIABLE;
-                //MessageBox.Show(test);
+                
                 con.Open();
-                DataTable _This_DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
-                List<String> _This_TableNameList = new List<string>();
-                _This_TableNameList.AddRange(from DataRow item in _This_DataBaseTables.Rows select item["TABLE_NAME"].ToString());
+
+                DataTable DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
+                List<String> TableNameList = new List<string>();
+                TableNameList.AddRange(from DataRow item in DataBaseTables.Rows select item["TABLE_NAME"].ToString());
                 String Result = String.Empty;
-                for (var index = 0; index < _This_TableNameList.Count; index++)
+                for (var index = 0; index < TableNameList.Count; index++)
                 {
 
-                    String Data = _This_TableNameList[index];
+                    String Data = TableNameList[index];
                     db_tables_names.Items.Add(Data);
                     Result += Data.ToString() + "\n";
                 }
 
                 MessageBox.Show(Result);
+
+
+
                 con.Close();
             }
            
@@ -168,9 +181,39 @@ namespace datagridview_and_database
 
         private void db_path_strings_checked(object sender, EventArgs e)
         {
-            foreach (var VARIABLE in db_path_strings.CheckedIndices)
+
+        } //получаем названия столбцов
+
+
+        private void get_column_name_v2(object sender, EventArgs e)
+        {
+            string temp = con_path_mask + fileName;
+            string temp2 = string.Empty;
+
+            OleDbConnection con = new OleDbConnection(temp);
+
+            foreach (var variable in db_tables_names.CheckedItems)
             {
-                
+                temp2 = "select ";
+                foreach (var table_cell in db_tables_cellnames.CheckedItems)
+                {
+                    
+                    temp2 = temp2 + " " + table_cell + ",";
+                }
+                int temp_index = temp2.Length - 1;
+                temp2 = temp2.Remove(temp_index);
+                temp2 = temp2 + " from " + variable;
+                con.Open();
+                OleDbCommand select_data = new OleDbCommand(temp2);
+                da = new OleDbDataAdapter(temp2, con);
+                ds = new DataSet();
+                da.Fill(ds);
+                bs = new BindingSource(ds, ds.Tables[0].TableName);
+                dataGridView1.DataSource = bs;
+                curr_Row = dataGridView1.Rows.Count - 1;
+                MessageBox.Show(curr_Row.ToString());
+                con.Close();
+
             }
         }
     }

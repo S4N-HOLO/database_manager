@@ -1,0 +1,10 @@
+C:\Users\asherbakov\Desktop\dgv-Main\bin\Debug\datagridview_and_database.exe.config
+C:\Users\asherbakov\Desktop\dgv-Main\bin\Debug\datagridview_and_database.exe
+C:\Users\asherbakov\Desktop\dgv-Main\bin\Debug\datagridview_and_database.pdb
+C:\Users\asherbakov\Desktop\dgv-Main\obj\Debug\datagridview_and_database.csprojAssemblyReference.cache
+C:\Users\asherbakov\Desktop\dgv-Main\obj\Debug\datagridview_and_database.Form1.resources
+C:\Users\asherbakov\Desktop\dgv-Main\obj\Debug\datagridview_and_database.Properties.Resources.resources
+C:\Users\asherbakov\Desktop\dgv-Main\obj\Debug\datagridview_and_database.csproj.GenerateResource.cache
+C:\Users\asherbakov\Desktop\dgv-Main\obj\Debug\datagridview_and_database.csproj.CoreCompileInputs.cache
+C:\Users\asherbakov\Desktop\dgv-Main\obj\Debug\datagridview_and_database.exe
+C:\Users\asherbakov\Desktop\dgv-Main\obj\Debug\datagridview_and_database.pdb

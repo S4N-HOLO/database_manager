@@ -81,7 +81,6 @@
             this.button6.TabIndex = 7;
             this.button6.Text = "get quantiy of rows";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.test1);
             // 
             // button7
             // 
@@ -103,7 +102,7 @@
             this.button8.TabIndex = 10;
             this.button8.Text = "загрузить дб в дгв";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.add_data_from_table_to_dgv);
+            this.button8.Click += new System.EventHandler(this.get_column_name_v2);
             // 
             // db_path_strings
             // 
