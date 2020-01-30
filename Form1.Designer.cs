@@ -91,7 +91,7 @@
             this.button7.TabIndex = 9;
             this.button7.Text = "get column names";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.get_column_name);
+            this.button7.Click += new System.EventHandler(this.get_column_name_ver2);
             // 
             // button8
             // 
@@ -102,7 +102,7 @@
             this.button8.TabIndex = 10;
             this.button8.Text = "загрузить дб в дгв";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.get_column_name_v2);
+            this.button8.Click += new System.EventHandler(this.add_data_to_dgv);
             // 
             // db_path_strings
             // 

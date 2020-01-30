@@ -126,7 +126,7 @@ namespace datagridview_and_database
             con.Open();
 
 
-
+            
              da = new OleDbDataAdapter("select*from Группы", con);
             ds = new DataSet();
             da.Fill(ds);
@@ -185,7 +185,7 @@ namespace datagridview_and_database
         } //получаем названия столбцов
 
 
-        private void get_column_name_v2(object sender, EventArgs e)
+        private void add_data_to_dgv(object sender, EventArgs e)
         {
             string temp = con_path_mask + fileName;
             string temp2 = string.Empty;
@@ -214,6 +214,37 @@ namespace datagridview_and_database
                 MessageBox.Show(curr_Row.ToString());
                 con.Close();
 
+            }
+        } //грузим данные в дгв
+
+
+        private void get_column_name_ver2(object sender, EventArgs e)
+        {
+            string temp = con_path_mask + fileName;
+            string temp_2 = string.Empty;
+            OleDbConnection con = new OleDbConnection(temp);
+            con.Open();
+
+
+
+            foreach (var variable in db_tables_names.CheckedItems)
+            {
+
+                temp_2 = "select * from " + variable;
+
+                da = new OleDbDataAdapter(temp_2, con);
+                ds = new DataSet();
+                da.Fill(ds);
+                bs = new BindingSource(ds, ds.Tables[0].TableName);
+
+                ;
+                DataTable dataTables = new DataTable();
+                da.Fill(dataTables);
+                con.Close();
+                foreach (var item in dataTables.Columns)
+                {
+                    db_tables_cellnames.Items.Add(item.ToString());
+                }
             }
         }
     }
