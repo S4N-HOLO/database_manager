@@ -204,9 +204,12 @@ namespace datagridview_and_database
                         continue;
                     temp2 = temp2 + " " + table_cell + ",";
                 }
+
                 int temp_index = temp2.Length - 1;
-                temp2 = temp2.Remove(temp_index);
+                temp2 = temp2.Remove(temp_index); // костыль для удаления последней запятой, кек
+
                 temp2 = temp2 + " from " + variable;
+
                 con.Open();
                 OleDbCommand select_data = new OleDbCommand(temp2);
                 da = new OleDbDataAdapter(temp2, con);
