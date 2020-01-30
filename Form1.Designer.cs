@@ -32,11 +32,13 @@
             this.db_tables_cellnames = new System.Windows.Forms.CheckedListBox();
             this.open_db_file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.db_path_strings = new System.Windows.Forms.CheckedListBox();
             this.db_tables_names = new System.Windows.Forms.CheckedListBox();
             this.button10 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,6 +71,16 @@
             this.button5.Text = "Загрузить дб в список";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.openfile);
+            // 
+            // button6
+            // 
+            this.button6.Enabled = false;
+            this.button6.Location = new System.Drawing.Point(766, 77);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(164, 23);
+            this.button6.TabIndex = 7;
+            this.button6.Text = "get quantiy of rows";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
@@ -119,16 +131,27 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.tablenames_from_db);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(951, 133);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1242, 514);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.db_tables_names);
             this.Controls.Add(this.db_path_strings);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.db_tables_cellnames);
             this.Controls.Add(this.dataGridView1);
@@ -136,6 +159,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -144,11 +168,13 @@
         private System.Windows.Forms.CheckedListBox db_tables_cellnames;
         private System.Windows.Forms.OpenFileDialog open_db_file_dialog;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckedListBox db_path_strings;
         private System.Windows.Forms.CheckedListBox db_tables_names;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Label label1;
     }
 }
 
