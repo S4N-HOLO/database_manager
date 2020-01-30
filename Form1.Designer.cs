@@ -51,7 +51,7 @@
             // db_tables_cellnames
             // 
             this.db_tables_cellnames.FormattingEnabled = true;
-            this.db_tables_cellnames.Location = new System.Drawing.Point(948, 12);
+            this.db_tables_cellnames.Location = new System.Drawing.Point(936, 316);
             this.db_tables_cellnames.Name = "db_tables_cellnames";
             this.db_tables_cellnames.Size = new System.Drawing.Size(278, 109);
             this.db_tables_cellnames.TabIndex = 2;
@@ -62,9 +62,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(766, 155);
+            this.button5.Location = new System.Drawing.Point(767, 12);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(164, 23);
+            this.button5.Size = new System.Drawing.Size(164, 36);
             this.button5.TabIndex = 6;
             this.button5.Text = "Загрузить дб в список";
             this.button5.UseVisualStyleBackColor = true;
@@ -73,9 +73,9 @@
             // button7
             // 
             this.button7.Enabled = false;
-            this.button7.Location = new System.Drawing.Point(767, 213);
+            this.button7.Location = new System.Drawing.Point(768, 98);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(164, 23);
+            this.button7.Size = new System.Drawing.Size(164, 38);
             this.button7.TabIndex = 9;
             this.button7.Text = "get column names";
             this.button7.UseVisualStyleBackColor = true;
@@ -84,9 +84,9 @@
             // button8
             // 
             this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(767, 242);
+            this.button8.Location = new System.Drawing.Point(769, 142);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(163, 23);
+            this.button8.Size = new System.Drawing.Size(163, 29);
             this.button8.TabIndex = 10;
             this.button8.Text = "загрузить дб в дгв";
             this.button8.UseVisualStyleBackColor = true;
@@ -95,7 +95,7 @@
             // db_path_strings
             // 
             this.db_path_strings.FormattingEnabled = true;
-            this.db_path_strings.Location = new System.Drawing.Point(948, 393);
+            this.db_path_strings.Location = new System.Drawing.Point(937, 12);
             this.db_path_strings.Name = "db_path_strings";
             this.db_path_strings.Size = new System.Drawing.Size(278, 109);
             this.db_path_strings.TabIndex = 11;
@@ -103,7 +103,7 @@
             // db_tables_names
             // 
             this.db_tables_names.FormattingEnabled = true;
-            this.db_tables_names.Location = new System.Drawing.Point(948, 184);
+            this.db_tables_names.Location = new System.Drawing.Point(936, 155);
             this.db_tables_names.Name = "db_tables_names";
             this.db_tables_names.Size = new System.Drawing.Size(278, 109);
             this.db_tables_names.TabIndex = 13;
@@ -111,9 +111,9 @@
             // button10
             // 
             this.button10.Enabled = false;
-            this.button10.Location = new System.Drawing.Point(767, 184);
+            this.button10.Location = new System.Drawing.Point(767, 54);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(164, 23);
+            this.button10.Size = new System.Drawing.Size(164, 38);
             this.button10.TabIndex = 14;
             this.button10.Text = "Get table names";
             this.button10.UseVisualStyleBackColor = true;
