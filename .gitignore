@@ -5,10 +5,10 @@
 
 
 # exe
-datagridview*.exe
+*.exe
 
 #pdb
-datagridview*.pdb
+*.pdb
 
 # User-specific files
 *.rsuser

@@ -12,10 +12,11 @@ using System.Data.Odbc;
 using System.Data.Sql;
 using System.Windows.Forms.VisualStyles;
 using System.IO;
-
+using System.Text.RegularExpressions;
 
 namespace datagridview_and_database
 {
+
     public partial class Form1 : Form
     {
 
@@ -34,7 +35,11 @@ namespace datagridview_and_database
 
         int curr_Row = int.MaxValue;
 
-       
+        List<String> TableNameList = new List<string>();
+        List<string> Addedtables = new List<string>();
+        List<string> Table_cell = new List<string>();
+
+
         private void Open_db_dialog_method(object sender, EventArgs e)
         {
 
@@ -47,7 +52,6 @@ namespace datagridview_and_database
             {
                 db_path_strings.Items.Add(open_db_file_dialog.FileName);
                 fileName = open_db_file_dialog.FileName;
-                button6.Enabled = true;
                 button7.Enabled = true;
                 button8.Enabled = true;
                 button10.Enabled = true;
@@ -56,12 +60,6 @@ namespace datagridview_and_database
             
         } //откдываем дб из локальных файлов по пути 
 
-        //private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб
-
-
-     
-
-       
 
         private void get_tablenames(object sender, EventArgs e)
         {
@@ -72,28 +70,20 @@ namespace datagridview_and_database
                 con.Open();
 
                 DataTable DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
-                List<String> TableNameList = new List<string>();
                 TableNameList.AddRange(from DataRow item in DataBaseTables.Rows select item["TABLE_NAME"].ToString());
                 String Result = String.Empty;
                 for (var index = 0; index < TableNameList.Count; index++)
                 {
-
+                    
                     String Data = TableNameList[index];
                     db_tables_names.Items.Add(Data);
                     Result += Data.ToString() + "\n";
+
                 }
-
-                MessageBox.Show(Result);
-
-
-
                 con.Close();
             }
            
         } //получаем названия таблиц
-
-
-
 
 
         private void push_data_to_dgv(object sender, EventArgs e)
@@ -111,7 +101,7 @@ namespace datagridview_and_database
 
 
                     if (table_cell.Equals("----"))
-                        continue;
+                        break;
                     temp2 = temp2 + " " + table_cell + ",";
                 }
 
@@ -127,7 +117,7 @@ namespace datagridview_and_database
                 da.Fill(ds);
                 bs = new BindingSource(ds, ds.Tables[0].TableName);
                 dataGridView1.DataSource = bs;
-                curr_Row = dataGridView1.Rows.Count - 1;
+                curr_Row = dataGridView1.Rows.Count - 1; // считаем количество строк данных
                 MessageBox.Show(curr_Row.ToString());
                 con.Close();
 
@@ -146,6 +136,12 @@ namespace datagridview_and_database
 
             foreach (var variable in db_tables_names.CheckedItems)
             {
+                if (Addedtables.Contains(variable))
+                    continue;
+
+
+                Addedtables.Add(variable.ToString());
+                
 
                 temp_2 = "select * from " + variable;
 
@@ -160,12 +156,36 @@ namespace datagridview_and_database
                 con.Close();
                 foreach (var item in dataTables.Columns)
                 {
+                    if (item == null)
+                        continue;
                     db_tables_cellnames.Items.Add(item.ToString());
-                    
+                    string addstring =variable + " " + item;
+                    Table_cell.Add(addstring);
                 }
-                db_tables_cellnames.Items.Add("----");
+                
+                    db_tables_cellnames.Items.Add("----");
+
+                foreach (var test in Table_cell)
+                    MessageBox.Show(test);
             }
+        } //получаем названия столбцов
+
+
+        private void edit_databases(object sender, EventArgs e)
+        {
+
         }
+
+
+        private string select_command_builder(string a)
+        {
+
+            return "a";
+        }
+
+
+
+
         /*
          * 
          * 
@@ -253,5 +273,7 @@ namespace datagridview_and_database
             MessageBox.Show(curr_Row.ToString());
             con.Close();
         } //добавление данных из дб БАЗА в дгв
+        private void test1(object sender, EventArgs e) { }//textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб
+
     }
 }
