@@ -34,55 +34,8 @@ namespace datagridview_and_database
 
         int curr_Row = int.MaxValue;
 
-
-
        
-
-       
-
-            /* private string save_string = "INSERT INTO baza(field1, field2, field3, field4) values";
-
-        private string table_name_sql =
-            "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'";*/
-
-        private void add_data_from_table_to_dgv(object sender, EventArgs e)
-        {
-            string temp = con_path_mask + fileName;
-
-
-            OleDbConnection con = new OleDbConnection(temp);
-
-            con.Open();
-            da = new OleDbDataAdapter("select*from Группы", con);
-            ds = new DataSet();
-            da.Fill(ds);
-            bs = new BindingSource(ds, ds.Tables[0].TableName);
-            dataGridView1.DataSource = bs;
-            curr_Row = dataGridView1.Rows.Count-1;
-            MessageBox.Show(curr_Row.ToString());
-            con.Close();
-        } //добавление данных из дб БАЗА в дгв
-
-       
-   
-
-        private void update_dgv(object sender, EventArgs e)
-        {
-            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
-
-            OleDbCommand refresh = new OleDbCommand("select*from test", con);
-            
-            dataGridView1.DataSource = null;
-            con.Open();
-            ds = new DataSet();
-            da.Fill(ds);
-            bs = new BindingSource(ds, ds.Tables[0].TableName);
-            dataGridView1.DataSource = bs;
-            con.Close();
-        } //обновление дгв
-
-
-        private void openfile(object sender, EventArgs e)
+        private void Open_db_dialog_method(object sender, EventArgs e)
         {
 
             open_db_file_dialog.InitialDirectory = "c:\\";
@@ -105,52 +58,12 @@ namespace datagridview_and_database
 
         //private void test1(object sender, EventArgs e) => textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб
 
-        private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            int temp = curr_Row++;
-            if (dataGridView1.Rows[temp].Cells[1] != null &&
-                dataGridView1.Rows[temp].Cells[2] != null &&
-                dataGridView1.Rows[temp].Cells[3] != null &&
-                dataGridView1.Rows[temp].Cells[4] != null)
-                curr_Row++;
-            else
-                MessageBox.Show("ты не заполнил все строки");
-            //textBox1.Text = curr_Row.ToString();
-        } //на самом деле в душе не ебу что оно должно делать, но вроде как при спадении фокуса добавляет строку с переменную со строками
 
-        private void get_column_name(object sender, EventArgs e)
-        {
-            db_tables_cellnames.Items.Add("----");
-            string temp = con_path_mask + fileName;
-            OleDbConnection con = new OleDbConnection(temp);
-            con.Open();
-
-
-            
-             da = new OleDbDataAdapter("select*from Группы", con);
-            ds = new DataSet();
-            da.Fill(ds);
-            bs = new BindingSource(ds, ds.Tables[0].TableName);
-
-           ;
-            DataTable dataTables = new DataTable();
-            da.Fill(dataTables);
-            con.Close();
-            foreach (var item in dataTables.Columns)
-            {
-                db_tables_cellnames.Items.Add(item.ToString());
-                db_tables_cellnames.Items.Add("____");
-            }
-
-
-
-
-           
-        } // получаем названия столбцов и закидываем их в секедлистбокс
+     
 
        
 
-        private void tablenames_from_db(object sender, EventArgs e)
+        private void get_tablenames(object sender, EventArgs e)
         {
             foreach (var VARIABLE in db_path_strings.CheckedItems)
             {
@@ -180,13 +93,10 @@ namespace datagridview_and_database
         } //получаем названия таблиц
 
 
-        private void db_path_strings_checked(object sender, EventArgs e)
-        {
-
-        } //получаем названия столбцов
 
 
-        private void add_data_to_dgv(object sender, EventArgs e)
+
+        private void push_data_to_dgv(object sender, EventArgs e)
         {
             string temp = con_path_mask + fileName;
             string temp2 = string.Empty;
@@ -256,5 +166,92 @@ namespace datagridview_and_database
                 db_tables_cellnames.Items.Add("----");
             }
         }
+        /*
+         * 
+         * 
+         * 
+         * 
+         * OLD METHODS
+         * 
+         * 
+         * 
+         * 
+         * */
+        private void get_column_name(object sender, EventArgs e)
+        {
+            db_tables_cellnames.Items.Add("----");
+            string temp = con_path_mask + fileName;
+            OleDbConnection con = new OleDbConnection(temp);
+            con.Open();
+
+
+
+            da = new OleDbDataAdapter("select*from Группы", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            bs = new BindingSource(ds, ds.Tables[0].TableName);
+
+            ;
+            DataTable dataTables = new DataTable();
+            da.Fill(dataTables);
+            con.Close();
+            foreach (var item in dataTables.Columns)
+            {
+                db_tables_cellnames.Items.Add(item.ToString());
+                db_tables_cellnames.Items.Add("____");
+            }
+
+
+
+
+
+        } // получаем названия столбцов и закидываем их в секедлистбокс
+        private void db_path_strings_checked(object sender, EventArgs e)
+        {
+
+        } //получаем названия столбцов
+        private void dataGridView1_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            int temp = curr_Row++;
+            if (dataGridView1.Rows[temp].Cells[1] != null &&
+                dataGridView1.Rows[temp].Cells[2] != null &&
+                dataGridView1.Rows[temp].Cells[3] != null &&
+                dataGridView1.Rows[temp].Cells[4] != null)
+                curr_Row++;
+            else
+                MessageBox.Show("ты не заполнил все строки");
+            //textBox1.Text = curr_Row.ToString();
+        } //на самом деле в душе не ебу что оно должно делать, но вроде как при спадении фокуса добавляет строку с переменную со строками
+        private void update_dgv(object sender, EventArgs e)
+        {
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+
+            OleDbCommand refresh = new OleDbCommand("select*from test", con);
+
+            dataGridView1.DataSource = null;
+            con.Open();
+            ds = new DataSet();
+            da.Fill(ds);
+            bs = new BindingSource(ds, ds.Tables[0].TableName);
+            dataGridView1.DataSource = bs;
+            con.Close();
+        } //обновление дгв
+        private void add_data_from_table_to_dgv(object sender, EventArgs e)
+        {
+            string temp = con_path_mask + fileName;
+
+
+            OleDbConnection con = new OleDbConnection(temp);
+
+            con.Open();
+            da = new OleDbDataAdapter("select*from Группы", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            bs = new BindingSource(ds, ds.Tables[0].TableName);
+            dataGridView1.DataSource = bs;
+            curr_Row = dataGridView1.Rows.Count - 1;
+            MessageBox.Show(curr_Row.ToString());
+            con.Close();
+        } //добавление данных из дб БАЗА в дгв
     }
 }

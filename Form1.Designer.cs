@@ -70,7 +70,7 @@
             this.button5.TabIndex = 6;
             this.button5.Text = "Загрузить дб в список";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.openfile);
+            this.button5.Click += new System.EventHandler(this.Open_db_dialog_method);
             // 
             // button6
             // 
@@ -102,7 +102,7 @@
             this.button8.TabIndex = 10;
             this.button8.Text = "загрузить дб в дгв";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.add_data_to_dgv);
+            this.button8.Click += new System.EventHandler(this.push_data_to_dgv);
             // 
             // db_path_strings
             // 
@@ -129,7 +129,7 @@
             this.button10.TabIndex = 14;
             this.button10.Text = "Get table names";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.tablenames_from_db);
+            this.button10.Click += new System.EventHandler(this.get_tablenames);
             // 
             // label1
             // 
