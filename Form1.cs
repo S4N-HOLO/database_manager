@@ -120,7 +120,7 @@ namespace datagridview_and_database
 
         private void get_column_name(object sender, EventArgs e)
         {
-           
+            db_tables_cellnames.Items.Add("----");
             string temp = con_path_mask + fileName;
             OleDbConnection con = new OleDbConnection(temp);
             con.Open();
@@ -139,6 +139,7 @@ namespace datagridview_and_database
             foreach (var item in dataTables.Columns)
             {
                 db_tables_cellnames.Items.Add(item.ToString());
+                db_tables_cellnames.Items.Add("____");
             }
 
 
@@ -197,7 +198,10 @@ namespace datagridview_and_database
                 temp2 = "select ";
                 foreach (var table_cell in db_tables_cellnames.CheckedItems)
                 {
-                    
+
+
+                    if (table_cell.Equals("----"))
+                        continue;
                     temp2 = temp2 + " " + table_cell + ",";
                 }
                 int temp_index = temp2.Length - 1;
@@ -225,7 +229,7 @@ namespace datagridview_and_database
             OleDbConnection con = new OleDbConnection(temp);
             con.Open();
 
-
+            db_tables_cellnames.Items.Add("----");
 
             foreach (var variable in db_tables_names.CheckedItems)
             {
@@ -244,7 +248,9 @@ namespace datagridview_and_database
                 foreach (var item in dataTables.Columns)
                 {
                     db_tables_cellnames.Items.Add(item.ToString());
+                    
                 }
+                db_tables_cellnames.Items.Add("----");
             }
         }
     }
