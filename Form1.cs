@@ -215,7 +215,7 @@ namespace datagridview_and_database
                 con.Close();
 
             }
-        } //грузим данные в дгв
+        } //грузим данные в дгв  
 
 
         private void get_column_name_ver2(object sender, EventArgs e)
