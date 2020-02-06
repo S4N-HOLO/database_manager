@@ -99,9 +99,8 @@ namespace datagridview_and_database
                 foreach (var table_cell in db_tables_cellnames.CheckedItems)
                 {
 
-
                     if (table_cell.Equals("----"))
-                        break;
+                        continue;
                     temp2 = temp2 + " " + table_cell + ",";
                 }
 
@@ -132,7 +131,11 @@ namespace datagridview_and_database
             OleDbConnection con = new OleDbConnection(temp);
             con.Open();
 
-            db_tables_cellnames.Items.Add("----");
+            if (db_tables_cellnames.Items.Count != 0)
+            { db_tables_cellnames.Items.Add("----");
+                
+            } //добавляем разделитель
+
 
             foreach (var variable in db_tables_names.CheckedItems)
             {
@@ -163,14 +166,22 @@ namespace datagridview_and_database
                     Table_cell.Add(addstring);
                 }
                 
-                    db_tables_cellnames.Items.Add("----");
+                    //db_tables_cellnames.Items.Add("----");
 
-                foreach (var test in Table_cell)
-                    MessageBox.Show(test);
+                //foreach (var test in Table_cell)
+                //    MessageBox.Show(test); вывод названий для теста
             }
         } //получаем названия столбцов
 
-
+        /*
+         * 
+         * 
+         * 
+         * 
+         * НАРАБОТКИ, ПУСТЬ БУДЕТ
+         * 
+         * 
+         * */
         private void edit_databases(object sender, EventArgs e)
         {
 

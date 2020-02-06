@@ -17,3 +17,13 @@ C:\Users\Tommy\source\repos\datagridview_and_database\obj\Debug\datagridview_and
 C:\Users\Tommy\source\repos\datagridview_and_database\obj\Debug\datagridview_and_database.exe
 C:\Users\Tommy\source\repos\datagridview_and_database\obj\Debug\datagridview_and_database.pdb
 C:\Users\Tommy\source\repos\datagridview_and_database\obj\Debug\datagridview_and_database.Form1.resources
+C:\Users\asherbakov\Source\Repos\dgv\bin\Debug\datagridview_and_database.exe.config
+C:\Users\asherbakov\Source\Repos\dgv\bin\Debug\datagridview_and_database.exe
+C:\Users\asherbakov\Source\Repos\dgv\bin\Debug\datagridview_and_database.pdb
+C:\Users\asherbakov\Source\Repos\dgv\obj\Debug\datagridview_and_database.csprojAssemblyReference.cache
+C:\Users\asherbakov\Source\Repos\dgv\obj\Debug\datagridview_and_database.Form1.resources
+C:\Users\asherbakov\Source\Repos\dgv\obj\Debug\datagridview_and_database.Properties.Resources.resources
+C:\Users\asherbakov\Source\Repos\dgv\obj\Debug\datagridview_and_database.csproj.GenerateResource.cache
+C:\Users\asherbakov\Source\Repos\dgv\obj\Debug\datagridview_and_database.csproj.CoreCompileInputs.cache
+C:\Users\asherbakov\Source\Repos\dgv\obj\Debug\datagridview_and_database.exe
+C:\Users\asherbakov\Source\Repos\dgv\obj\Debug\datagridview_and_database.pdb
