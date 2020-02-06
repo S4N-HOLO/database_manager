@@ -29,6 +29,9 @@ namespace datagridview_and_database
 
         private string con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
 
+
+        string test = " select Студенты.Имя, Группы.Код_специальности from Группы, Студенты";
+
         OleDbDataAdapter da = new OleDbDataAdapter();
         BindingSource bs = new BindingSource();
         DataSet ds = new DataSet();
@@ -37,7 +40,7 @@ namespace datagridview_and_database
 
         List<String> TableNameList = new List<string>();
         List<string> Addedtables = new List<string>();
-        List<string> Table_cell = new List<string>();
+        List<string> Table_cell_equals_list = new List<string>();
 
 
         private void Open_db_dialog_method(object sender, EventArgs e)
@@ -90,18 +93,31 @@ namespace datagridview_and_database
         {
             string temp = con_path_mask + fileName;
             string temp2 = string.Empty;
+            string pattern = string.Empty;
+            //Regex rx = new Regex(pattern); регулярка
+
 
             OleDbConnection con = new OleDbConnection(temp);
 
             foreach (var variable in db_tables_names.CheckedItems)
             {
                 temp2 = "select ";
+                
                 foreach (var table_cell in db_tables_cellnames.CheckedItems)
                 {
 
                     if (table_cell.Equals("----"))
                         continue;
+                    pattern = variable.ToString() + " " + table_cell.ToString();
+
+                    if (!Table_cell_equals_list.Contains(pattern))
+                    {
+                        continue;
+                    }
+
+
                     temp2 = temp2 + " " + table_cell + ",";
+                    
                 }
 
                 int temp_index = temp2.Length - 1;
@@ -122,6 +138,61 @@ namespace datagridview_and_database
 
             }
         } //грузим данные в дгв
+
+        private void push_data_to_dgv_ver2(object sender, EventArgs e)
+        {
+            string temp = con_path_mask + fileName;
+            string temp2 = string.Empty;
+            string temp3 = string.Empty;
+            string pattern = string.Empty;
+            //Regex rx = new Regex(pattern); регулярка
+
+
+            OleDbConnection con = new OleDbConnection(temp);
+            foreach (var variable in db_tables_names.CheckedItems)
+            {
+                temp2 = "select ";
+                temp3 = temp3 + variable + ", ";
+                foreach (var table_cell in db_tables_cellnames.CheckedItems)
+                {
+
+                    if (table_cell.Equals("----"))
+                        continue;
+                    pattern = variable.ToString() + "." + table_cell.ToString();
+                    if (Table_cell_equals_list.Contains(pattern))
+                        if(db_tables_cellnames.CheckedItems.Count == 1)
+                            temp2 = temp2 + pattern + "";
+                        else if (db_tables_cellnames.CheckedItems.Count > 1)
+                            temp2 = temp2 + pattern + ", ";
+
+                }
+            }
+
+             // костыль для удаления последней запятой, кек
+
+            temp2 = temp2 + " from " + temp3;
+            int temp_index = temp2.Length - 1;
+            temp2 = temp2.Remove(temp_index);
+            temp_index = temp2.Length - 1;
+            temp2 = temp2.Remove(temp_index);
+
+            con.Open();
+            OleDbCommand select_data = new OleDbCommand(temp2);
+            da = new OleDbDataAdapter(temp2, con);
+            ds = new DataSet();
+            da.Fill(ds);
+            bs = new BindingSource(ds, ds.Tables[0].TableName);
+            dataGridView1.DataSource = bs;
+            curr_Row = dataGridView1.Rows.Count - 1; // считаем количество строк данных
+            MessageBox.Show(curr_Row.ToString());
+            con.Close();
+
+        } //новая версия
+
+        private void test_s (object sender, EventArgs e)
+        {
+
+        }
 
 
         private void get_column_name_ver2(object sender, EventArgs e)
@@ -162,11 +233,11 @@ namespace datagridview_and_database
                     if (item == null)
                         continue;
                     db_tables_cellnames.Items.Add(item.ToString());
-                    string addstring =variable + " " + item;
-                    Table_cell.Add(addstring);
+                    string addstring =variable + "." + item;
+                    Table_cell_equals_list.Add(addstring);
                 }
-                
-                    //db_tables_cellnames.Items.Add("----");
+
+                db_tables_cellnames.Items.Add("----");
 
                 //foreach (var test in Table_cell)
                 //    MessageBox.Show(test); вывод названий для теста
