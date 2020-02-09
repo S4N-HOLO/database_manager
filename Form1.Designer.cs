@@ -37,7 +37,6 @@
             this.db_path_strings = new System.Windows.Forms.CheckedListBox();
             this.db_tables_names = new System.Windows.Forms.CheckedListBox();
             this.button10 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +52,7 @@
             // db_tables_cellnames
             // 
             this.db_tables_cellnames.FormattingEnabled = true;
-            this.db_tables_cellnames.Location = new System.Drawing.Point(927, 358);
+            this.db_tables_cellnames.Location = new System.Drawing.Point(929, 270);
             this.db_tables_cellnames.Name = "db_tables_cellnames";
             this.db_tables_cellnames.Size = new System.Drawing.Size(278, 109);
             this.db_tables_cellnames.TabIndex = 2;
@@ -92,7 +91,7 @@
             this.button8.TabIndex = 10;
             this.button8.Text = "загрузить дб в дгв";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.push_data_to_dgv);
+            this.button8.Click += new System.EventHandler(this.push_data_to_dgv_ver3);
             // 
             // db_path_strings
             // 
@@ -105,7 +104,7 @@
             // db_tables_names
             // 
             this.db_tables_names.FormattingEnabled = true;
-            this.db_tables_names.Location = new System.Drawing.Point(927, 197);
+            this.db_tables_names.Location = new System.Drawing.Point(476, 550);
             this.db_tables_names.Name = "db_tables_names";
             this.db_tables_names.Size = new System.Drawing.Size(278, 109);
             this.db_tables_names.TabIndex = 13;
@@ -121,20 +120,10 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.get_tablenames);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(818, 298);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.push_data_to_dgv_ver2);
-            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(927, 514);
+            this.listBox1.Location = new System.Drawing.Point(929, 169);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(277, 95);
             this.listBox1.TabIndex = 16;
@@ -146,7 +135,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1242, 670);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.db_tables_names);
             this.Controls.Add(this.db_path_strings);
@@ -172,7 +160,6 @@
         private System.Windows.Forms.CheckedListBox db_path_strings;
         private System.Windows.Forms.CheckedListBox db_tables_names;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
     }
 }
