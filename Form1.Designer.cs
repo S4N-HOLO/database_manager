@@ -38,13 +38,14 @@
             this.db_tables_names = new System.Windows.Forms.CheckedListBox();
             this.button10 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(14, 54);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(740, 490);
             this.dataGridView1.TabIndex = 1;
@@ -52,7 +53,7 @@
             // db_tables_cellnames
             // 
             this.db_tables_cellnames.FormattingEnabled = true;
-            this.db_tables_cellnames.Location = new System.Drawing.Point(936, 316);
+            this.db_tables_cellnames.Location = new System.Drawing.Point(927, 358);
             this.db_tables_cellnames.Name = "db_tables_cellnames";
             this.db_tables_cellnames.Size = new System.Drawing.Size(278, 109);
             this.db_tables_cellnames.TabIndex = 2;
@@ -63,7 +64,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(767, 12);
+            this.button5.Location = new System.Drawing.Point(758, 54);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(164, 36);
             this.button5.TabIndex = 6;
@@ -74,7 +75,7 @@
             // button7
             // 
             this.button7.Enabled = false;
-            this.button7.Location = new System.Drawing.Point(768, 98);
+            this.button7.Location = new System.Drawing.Point(759, 140);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(164, 38);
             this.button7.TabIndex = 9;
@@ -85,7 +86,7 @@
             // button8
             // 
             this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(769, 142);
+            this.button8.Location = new System.Drawing.Point(760, 184);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(163, 29);
             this.button8.TabIndex = 10;
@@ -96,7 +97,7 @@
             // db_path_strings
             // 
             this.db_path_strings.FormattingEnabled = true;
-            this.db_path_strings.Location = new System.Drawing.Point(937, 12);
+            this.db_path_strings.Location = new System.Drawing.Point(928, 54);
             this.db_path_strings.Name = "db_path_strings";
             this.db_path_strings.Size = new System.Drawing.Size(278, 109);
             this.db_path_strings.TabIndex = 11;
@@ -104,7 +105,7 @@
             // db_tables_names
             // 
             this.db_tables_names.FormattingEnabled = true;
-            this.db_tables_names.Location = new System.Drawing.Point(936, 155);
+            this.db_tables_names.Location = new System.Drawing.Point(927, 197);
             this.db_tables_names.Name = "db_tables_names";
             this.db_tables_names.Size = new System.Drawing.Size(278, 109);
             this.db_tables_names.TabIndex = 13;
@@ -112,7 +113,7 @@
             // button10
             // 
             this.button10.Enabled = false;
-            this.button10.Location = new System.Drawing.Point(767, 54);
+            this.button10.Location = new System.Drawing.Point(758, 96);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(164, 38);
             this.button10.TabIndex = 14;
@@ -122,7 +123,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(827, 256);
+            this.button1.Location = new System.Drawing.Point(818, 298);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
@@ -130,11 +131,21 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.push_data_to_dgv_ver2);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(927, 514);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(277, 95);
+            this.listBox1.TabIndex = 16;
+            this.listBox1.SelectedValueChanged += new System.EventHandler(this.listBox1_SelectedValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1242, 514);
+            this.ClientSize = new System.Drawing.Size(1242, 670);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.db_tables_names);
@@ -162,6 +173,7 @@
         private System.Windows.Forms.CheckedListBox db_tables_names;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

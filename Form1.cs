@@ -79,6 +79,7 @@ namespace datagridview_and_database
                 {
                     
                     String Data = TableNameList[index];
+                    listBox1.Items.Add(Data);
                     db_tables_names.Items.Add(Data);
                     Result += Data.ToString() + "\n";
 
@@ -243,7 +244,7 @@ namespace datagridview_and_database
                 //    MessageBox.Show(test); вывод названий для теста
             }
         } //получаем названия столбцов
-
+        
         /*
          * 
          * 
@@ -265,8 +266,10 @@ namespace datagridview_and_database
             return "a";
         }
 
-
-
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(listBox1.SelectedItem.ToString());
+        }
 
         /*
          * 
@@ -357,5 +360,6 @@ namespace datagridview_and_database
         } //добавление данных из дб БАЗА в дгв
         private void test1(object sender, EventArgs e) { }//textBox1.Text = curr_Row.ToString(); // тест количества строк с данными в дб
 
+        
     }
 }
