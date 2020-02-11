@@ -56,46 +56,13 @@ namespace datagridview_and_database
             {
                 db_path_strings.Items.Add(open_db_file_dialog.FileName);
                 fileName = open_db_file_dialog.FileName;
-                button7.Enabled = true;
-                button8.Enabled = true;
-                button10.Enabled = true;
+                //button7.Enabled = true;
+                //button8.Enabled = true;
+                //button10.Enabled = true;
             }
 
             
         } //откдываем дб из локальных файлов по пути 
-
-
-        private void get_tablenames(object sender, EventArgs e)
-        {
-            foreach (var VARIABLE in db_path_strings.CheckedItems)
-            {
-                OleDbConnection con = new OleDbConnection(con_path_mask + VARIABLE);
-                
-                con.Open();
-
-                DataTable DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
-                TableNameList.AddRange(from DataRow item in DataBaseTables.Rows select item["TABLE_NAME"].ToString());
-                String Result = String.Empty;
-                for (var index = 0; index < TableNameList.Count; index++)
-                {
-                    
-                    String Data = TableNameList[index];
-                    listBox1.Items.Add(Data);
-                    db_tables_names.Items.Add(Data);
-                    Result += Data.ToString() + "\n";
-
-                }
-                con.Close();
-            }
-           
-        } //получаем названия таблиц
-
-
-        private void treeview_test(object sender, EventArgs e)
-        {
-
-        }
-
         private void push_data_to_dgv_ver3(object sender, EventArgs e)
         {
             string select_cmd = "select";
@@ -126,8 +93,6 @@ namespace datagridview_and_database
             con.Close();
         }
         } //super new version
-
-
         private void newultramethod_add_data_totree(object sender, EventArgs e)
         {
             foreach (var VARIABLE in db_path_strings.CheckedItems)
@@ -143,11 +108,22 @@ namespace datagridview_and_database
                 String Result = String.Empty;
 
 
+
                 
                 for (var index = 0; index < TableNameList.Count; index++)
                 {
 
+                    bool finder = false;
                     String Data = TableNameList[index];
+                    for (int node_counter = 0; node_counter < treeView1.Nodes.Count; node_counter++)
+                    {
+                        if (treeView1.Nodes[node_counter].Text.Contains(Data))
+                        {
+                            finder = true;
+                        }
+                    }
+                    if (finder)
+                        continue;
                     treeView1.Nodes.Add(Data);
                     temp_2 = "select * from " + Data;
                     da = new OleDbDataAdapter(temp_2, con);
@@ -168,86 +144,6 @@ namespace datagridview_and_database
             }
         }
 
-
-        private void get_column_name_ver2(object sender, EventArgs e)
-        {
-            string temp = con_path_mask + fileName;
-            string temp_2 = string.Empty;
-            OleDbConnection con = new OleDbConnection(temp);
-            con.Open();
-
-            if (db_tables_cellnames.Items.Count != 0)
-            { db_tables_cellnames.Items.Add("----");
-                
-            } //добавляем разделитель
-
-
-            foreach (var variable in db_tables_names.CheckedItems)
-            {
-                if (Addedtables.Contains(variable))
-                    continue;
-
-
-                Addedtables.Add(variable.ToString());
-                
-
-                temp_2 = "select * from " + variable;
-
-                da = new OleDbDataAdapter(temp_2, con);
-                ds = new DataSet();
-                da.Fill(ds);
-                bs = new BindingSource(ds, ds.Tables[0].TableName);
-
-                ;
-                DataTable dataTables = new DataTable();
-                da.Fill(dataTables);
-                con.Close();
-                foreach (var item in dataTables.Columns)
-                {
-                    if (item == null)
-                        continue;
-                    db_tables_cellnames.Items.Add(item.ToString());
-                    string addstring =variable + "." + item;
-                    Table_cell_equals_list.Add(addstring);
-                }
-
-                db_tables_cellnames.Items.Add("----");
-
-                //foreach (var test in Table_cell)
-                //    MessageBox.Show(test); вывод названий для теста
-            }
-        } //получаем названия столбцов
-        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            db_tables_cellnames.Items.Clear();
-
-            string temp = con_path_mask + fileName;
-            string temp_2 = string.Empty;
-            OleDbConnection con = new OleDbConnection(temp);
-            con.Open();
-            Addedtables.Add(listBox1.SelectedItem.ToString());
-
-
-            temp_2 = "select * from " + listBox1.SelectedItem;
-
-            da = new OleDbDataAdapter(temp_2, con);
-            ds = new DataSet();
-            da.Fill(ds);
-            bs = new BindingSource(ds, ds.Tables[0].TableName);
-
-            ;
-            DataTable dataTables = new DataTable();
-            da.Fill(dataTables);
-            con.Close();
-            foreach (var item in dataTables.Columns)
-            {
-                if (item == null)
-                    continue;
-                db_tables_cellnames.Items.Add(item.ToString());
-                //string addstring = variable + "." + item;
-                //Table_cell_equals_list.Add(addstring);
-            }
-        }
         /*
          * 
          * 
@@ -268,8 +164,11 @@ namespace datagridview_and_database
 
             return "a";
         }
+        private void treeview_test(object sender, EventArgs e)
+        {
 
-       
+        }
+
 
         /*
          * 
@@ -457,6 +356,113 @@ namespace datagridview_and_database
             con.Close();
 
         } //новая версия
+        private void get_tablenames(object sender, EventArgs e)
+        {
+            foreach (var VARIABLE in db_path_strings.CheckedItems)
+            {
+                OleDbConnection con = new OleDbConnection(con_path_mask + VARIABLE);
+
+                con.Open();
+
+                DataTable DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
+                TableNameList.AddRange(from DataRow item in DataBaseTables.Rows select item["TABLE_NAME"].ToString());
+                String Result = String.Empty;
+                for (var index = 0; index < TableNameList.Count; index++)
+                {
+
+                    String Data = TableNameList[index];
+                    listBox1.Items.Add(Data);
+                    db_tables_names.Items.Add(Data);
+                    Result += Data.ToString() + "\n";
+
+                }
+                con.Close();
+            }
+
+        } //получаем названия таблиц
+        private void get_column_name_ver2(object sender, EventArgs e)
+        {
+            string temp = con_path_mask + fileName;
+            string temp_2 = string.Empty;
+            OleDbConnection con = new OleDbConnection(temp);
+            con.Open();
+
+            if (db_tables_cellnames.Items.Count != 0)
+            {
+                db_tables_cellnames.Items.Add("----");
+
+            } //добавляем разделитель
+
+
+            foreach (var variable in db_tables_names.CheckedItems)
+            {
+                if (Addedtables.Contains(variable))
+                    continue;
+
+
+                Addedtables.Add(variable.ToString());
+
+
+                temp_2 = "select * from " + variable;
+
+                da = new OleDbDataAdapter(temp_2, con);
+                ds = new DataSet();
+                da.Fill(ds);
+                bs = new BindingSource(ds, ds.Tables[0].TableName);
+
+                ;
+                DataTable dataTables = new DataTable();
+                da.Fill(dataTables);
+                con.Close();
+                foreach (var item in dataTables.Columns)
+                {
+                    if (item == null)
+                        continue;
+                    db_tables_cellnames.Items.Add(item.ToString());
+                    string addstring = variable + "." + item;
+                    Table_cell_equals_list.Add(addstring);
+                }
+
+                db_tables_cellnames.Items.Add("----");
+
+                //foreach (var test in Table_cell)
+                //    MessageBox.Show(test); вывод названий для теста
+            }
+        } //получаем названия столбцов
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            db_tables_cellnames.Items.Clear();
+
+            string temp = con_path_mask + fileName;
+            string temp_2 = string.Empty;
+            OleDbConnection con = new OleDbConnection(temp);
+            con.Open();
+            Addedtables.Add(listBox1.SelectedItem.ToString());
+
+
+            temp_2 = "select * from " + listBox1.SelectedItem;
+
+            da = new OleDbDataAdapter(temp_2, con);
+            ds = new DataSet();
+            da.Fill(ds);
+            bs = new BindingSource(ds, ds.Tables[0].TableName);
+
+            ;
+            DataTable dataTables = new DataTable();
+            da.Fill(dataTables);
+            con.Close();
+            foreach (var item in dataTables.Columns)
+            {
+                if (item == null)
+                    continue;
+                db_tables_cellnames.Items.Add(item.ToString());
+                //string addstring = variable + "." + item;
+                //Table_cell_equals_list.Add(addstring);
+            }
+        }
+       
+
+
 
     }
 }
