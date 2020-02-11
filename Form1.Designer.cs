@@ -133,6 +133,7 @@
             // 
             // treeView1
             // 
+            this.treeView1.CheckBoxes = true;
             this.treeView1.Location = new System.Drawing.Point(929, 439);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(121, 97);
@@ -146,7 +147,7 @@
             this.button1.TabIndex = 18;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.treeview_test);
+            this.button1.Click += new System.EventHandler(this.newultramethod_add_data_totree);
             // 
             // Form1
             // 

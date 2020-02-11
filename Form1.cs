@@ -94,35 +94,6 @@ namespace datagridview_and_database
         private void treeview_test(object sender, EventArgs e)
         {
 
-            if (treeView1.Nodes.Count == 0)
-                treeView1.Nodes.Add(listBox1.SelectedItem.ToString());
-            else
-           foreach (var nodes_list in treeView1.Nodes.ToString())
-            {
-                if (!nodes_list.Equals(listBox1.SelectedItem.ToString()))
-                    treeView1.Nodes.Add(listBox1.SelectedItem.ToString());
-
-            }
-
-            foreach (var table_cellname in db_tables_cellnames.CheckedItems)
-            {
-
-                for (int node_index = 0; node_index != treeView1.Nodes.Count; node_index++)
-                {
-                    if (treeView1.Nodes[node_index].Text.Contains(listBox1.SelectedItem.ToString()))
-                    {
-                        treeView1.Nodes[node_index].Nodes.Add(table_cellname.ToString());
-                    }
-                    else
-                    {
-                        treeView1.Nodes.Add(listBox1.SelectedItem.ToString());
-                        treeView1.Nodes[node_index].Nodes.Add(table_cellname.ToString());
-                    }
-                    
-                }
-                
-            }
-
         }
 
         private void push_data_to_dgv_ver3(object sender, EventArgs e)
@@ -157,9 +128,44 @@ namespace datagridview_and_database
         } //super new version
 
 
-        private void test_s (object sender, EventArgs e)
+        private void newultramethod_add_data_totree(object sender, EventArgs e)
         {
+            foreach (var VARIABLE in db_path_strings.CheckedItems)
+            {
+                string temp = con_path_mask + fileName;
+                string temp_2 = string.Empty;
+                OleDbConnection con = new OleDbConnection(con_path_mask + VARIABLE);
 
+                con.Open();
+
+                DataTable DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
+                TableNameList.AddRange(from DataRow item in DataBaseTables.Rows select item["TABLE_NAME"].ToString());
+                String Result = String.Empty;
+
+
+                
+                for (var index = 0; index < TableNameList.Count; index++)
+                {
+
+                    String Data = TableNameList[index];
+                    treeView1.Nodes.Add(Data);
+                    temp_2 = "select * from " + Data;
+                    da = new OleDbDataAdapter(temp_2, con);
+                    ds = new DataSet();
+                    da.Fill(ds);
+                    bs = new BindingSource(ds, ds.Tables[0].TableName);
+                    DataTable dataTables = new DataTable();
+                    da.Fill(dataTables);
+                    foreach (var item in dataTables.Columns)
+                    {
+                        if (item == null)
+                            continue;
+                        treeView1.Nodes[index].Nodes.Add(item.ToString());
+                    }
+                }
+               
+                con.Close();
+            }
         }
 
 
