@@ -14,6 +14,7 @@ using System.Windows.Forms.VisualStyles;
 using System.IO;
 using System.Text.RegularExpressions;
 
+
 namespace datagridview_and_database
 {
 
@@ -90,7 +91,39 @@ namespace datagridview_and_database
         } //получаем названия таблиц
 
 
-     
+        private void treeview_test(object sender, EventArgs e)
+        {
+
+            if (treeView1.Nodes.Count == 0)
+                treeView1.Nodes.Add(listBox1.SelectedItem.ToString());
+            else
+           foreach (var nodes_list in treeView1.Nodes.ToString())
+            {
+                if (!nodes_list.Equals(listBox1.SelectedItem.ToString()))
+                    treeView1.Nodes.Add(listBox1.SelectedItem.ToString());
+
+            }
+
+            foreach (var table_cellname in db_tables_cellnames.CheckedItems)
+            {
+
+                for (int node_index = 0; node_index != treeView1.Nodes.Count; node_index++)
+                {
+                    if (treeView1.Nodes[node_index].Text.Contains(listBox1.SelectedItem.ToString()))
+                    {
+                        treeView1.Nodes[node_index].Nodes.Add(table_cellname.ToString());
+                    }
+                    else
+                    {
+                        treeView1.Nodes.Add(listBox1.SelectedItem.ToString());
+                        treeView1.Nodes[node_index].Nodes.Add(table_cellname.ToString());
+                    }
+                    
+                }
+                
+            }
+
+        }
 
         private void push_data_to_dgv_ver3(object sender, EventArgs e)
         {
@@ -178,28 +211,6 @@ namespace datagridview_and_database
                 //    MessageBox.Show(test); вывод названий для теста
             }
         } //получаем названия столбцов
-        
-        /*
-         * 
-         * 
-         * 
-         * 
-         * НАРАБОТКИ, ПУСТЬ БУДЕТ
-         * 
-         * 
-         * */
-        private void edit_databases(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private string select_command_builder(string a)
-        {
-
-            return "a";
-        }
-
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             db_tables_cellnames.Items.Clear();
@@ -208,7 +219,7 @@ namespace datagridview_and_database
             string temp_2 = string.Empty;
             OleDbConnection con = new OleDbConnection(temp);
             con.Open();
-            Addedtables.Add(listBox1.SelectedItem.ToString()) ;
+            Addedtables.Add(listBox1.SelectedItem.ToString());
 
 
             temp_2 = "select * from " + listBox1.SelectedItem;
@@ -231,6 +242,28 @@ namespace datagridview_and_database
                 //Table_cell_equals_list.Add(addstring);
             }
         }
+        /*
+         * 
+         * 
+         * 
+         * 
+         * НАРАБОТКИ, ПУСТЬ БУДЕТ
+         * 
+         * 
+         * */
+        private void edit_databases(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private string select_command_builder(string a)
+        {
+
+            return "a";
+        }
+
+       
 
         /*
          * 
