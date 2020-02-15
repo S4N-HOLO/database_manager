@@ -15,6 +15,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 
 
+
 namespace datagridview_and_database
 {
 
@@ -25,7 +26,6 @@ namespace datagridview_and_database
         {
             InitializeComponent();
         }
-
         private String fileName = "C:\\";
         private String con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
 
@@ -33,7 +33,7 @@ namespace datagridview_and_database
         String push_string = "select";
         String From_collector = String.Empty;
         String conn_mask = String.Empty;
-        String insert_command_mask = "INSERT INTO";
+        String insert_command_mask = String.Empty;
         OleDbDataAdapter da = new OleDbDataAdapter();
         BindingSource bs = new BindingSource();
         DataSet ds = new DataSet();
@@ -43,6 +43,8 @@ namespace datagridview_and_database
         List<String> TableNameList = new List<String>();
         List<String> Addedtables = new List<String>();
         List<String> Table_cell_equals_list = new List<String>();
+        List<String> Test = new List<String>();
+        Dictionary<String, List<String>> test_dic = new Dictionary<String, List<String>>();
 
 
         private void Open_db_dialog_method(object sender, EventArgs e)
@@ -73,25 +75,17 @@ namespace datagridview_and_database
                 OleDbConnection con = new OleDbConnection(con_path_mask + VARIABLE);
 
                 con.Open();
-
                 DataTable DataBaseTables = con.GetSchema("Tables", new[] { null, null, null, "TABLE" });
                 TableNameList.AddRange(from DataRow item in DataBaseTables.Rows select item["TABLE_NAME"].ToString());
                 String Result = String.Empty;
-
-
-
-
                 for (var index = 0; index < TableNameList.Count; index++)
                 {
-
                     bool finder = false;
                     String Data = TableNameList[index];
                     for (int node_counter = 0; node_counter < treeView1.Nodes.Count; node_counter++)
                     {
                         if (treeView1.Nodes[node_counter].Text.Contains(Data))
-                        {
                             finder = true;
-                        }
                     }
                     if (finder)
                         continue;
@@ -110,39 +104,56 @@ namespace datagridview_and_database
                         treeView1.Nodes[index].Nodes.Add(item.ToString());
                     }
                 }
-                //test
                 con.Close();
             }
         }
         private void push_data(object sender, EventArgs e)
         {
-
             OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
 
             conn_mask = String.Empty;
             push_string = "select";
             From_collector = String.Empty;
+            String a = String.Empty;
+            test_dic.Clear();
             for (int counter = 0; counter < treeView1.Nodes.Count; counter++)
             {
                 bool added = false;
+
                 foreach (TreeNode checkedNodes in treeView1.Nodes[counter].Nodes)
                 {
+                    
                     if (checkedNodes.Checked)
                     {
                         conn_mask += " " + treeview_deleter(treeView1.Nodes[counter].ToString()) +
                             "." + treeview_deleter(checkedNodes.ToString()) + ",";
+                        //Test.Add(treeview_deleter(checkedNodes.ToString()));
                         if (!added)
-                        { From_collector += treeview_deleter(treeView1.Nodes[counter].ToString()) + ", "; }
+                        {
+                            From_collector += treeview_deleter(treeView1.Nodes[counter].ToString()) + ", ";
+                            a += treeview_deleter(treeView1.Nodes[counter].ToString()) + ", ";
+                        }
+
                         added = true;
                     }
-                }
 
-                //From_collector += treeview_deleter(treeView1.Nodes[counter].ToString()) + ", ";
+                }
+                Test.Add(a);
+                //if (!test_dic.ContainsKey(a))
+                //    test_dic.Add(a, Test);
+                //else
+                //    test_dic[a] = Test;
+                //Test.Clear();
             }
+            //foreach (var x in test_dic.Keys)
+            //    MessageBox.Show(x);
+            //foreach (var x in test_dic[a])
+            //    MessageBox.Show(x);
             if (conn_mask != String.Empty)
             {
+                treeView1.CheckBoxes = false;
+                
                 push_string += conn_mask.Remove(conn_mask.Length - 1) + " from " + From_collector.Remove(From_collector.Length - 2);
-
                 con.Open();
 
                 OleDbCommand select_data = new OleDbCommand(push_string);
@@ -156,18 +167,18 @@ namespace datagridview_and_database
                 con.Close();
             }
         }
+        private void validate_checkboxes(object sender, EventArgs e) => treeView1.CheckBoxes = true;
         private void update_datatables(object sender, EventArgs e)
         {
-            String insert = "insert";
+            insert_command_mask = "INSERT INTO";
 
-            for (int counter = 0; counter < dataGridView1.Columns.Count; counter++)
+            foreach(var dic in test_dic.Keys)
             {
-                MessageBox.Show(dataGridView1.Columns[counter].HeaderText);
+                foreach (string v in test_dic[dic])
+                    MessageBox.Show(v);
 
-
-               
             }
-            
+    
         }
         private String treeview_deleter(String con_path) {return con_path.Substring(10, con_path.Length - 10);}
         
@@ -514,4 +525,5 @@ namespace datagridview_and_database
         } //super new version
 
     }
+    
 }
