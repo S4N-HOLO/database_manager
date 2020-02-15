@@ -26,22 +26,23 @@ namespace datagridview_and_database
             InitializeComponent();
         }
 
-        private string fileName = "C:\\";
+        private String fileName = "C:\\";
+        private String con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
 
-        private string con_path_mask = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=";
 
-
-        string test = " select Студенты.Имя, Группы.Код_специальности from Группы, Студенты";
-
+        String push_string = "select";
+        String From_collector = String.Empty;
+        String conn_mask = String.Empty;
+        String insert_command_mask = "INSERT INTO";
         OleDbDataAdapter da = new OleDbDataAdapter();
         BindingSource bs = new BindingSource();
         DataSet ds = new DataSet();
 
         int curr_Row = int.MaxValue;
 
-        List<String> TableNameList = new List<string>();
-        List<string> Addedtables = new List<string>();
-        List<string> Table_cell_equals_list = new List<string>();
+        List<String> TableNameList = new List<String>();
+        List<String> Addedtables = new List<String>();
+        List<String> Table_cell_equals_list = new List<String>();
 
 
         private void Open_db_dialog_method(object sender, EventArgs e)
@@ -61,38 +62,8 @@ namespace datagridview_and_database
                 //button10.Enabled = true;
             }
 
-            
+
         } //откдываем дб из локальных файлов по пути 
-        private void push_data_to_dgv_ver3(object sender, EventArgs e)
-        {
-            string select_cmd = "select";
-            string temp = con_path_mask + fileName;
-            //da.Dispose();
-
-            OleDbConnection con = new OleDbConnection(temp);
-
-            if (db_tables_cellnames.CheckedItems.Count == 0)
-            { MessageBox.Show("выберите столбцы"); }
-            else { 
-            foreach (var table_cellname in db_tables_cellnames.CheckedItems)
-            {
-                select_cmd += " " + table_cellname + ",";
-            }
-            int temp_index = select_cmd.Length - 1;
-            select_cmd = select_cmd.Remove(temp_index);
-            select_cmd = select_cmd + " from " + listBox1.SelectedItem;
-            con.Open();
-            OleDbCommand select_data = new OleDbCommand(select_cmd);
-            da = new OleDbDataAdapter(select_cmd, con);
-            ds = new DataSet();
-            da.Fill(ds);
-            bs = new BindingSource(ds, ds.Tables[0].TableName);
-            dataGridView1.DataSource = bs;
-            curr_Row = dataGridView1.Rows.Count - 1; // считаем количество строк данных
-            MessageBox.Show(curr_Row.ToString());
-            con.Close();
-        }
-        } //super new version
         private void newultramethod_add_data_totree(object sender, EventArgs e)
         {
             foreach (var VARIABLE in db_path_strings.CheckedItems)
@@ -109,7 +80,7 @@ namespace datagridview_and_database
 
 
 
-                
+
                 for (var index = 0; index < TableNameList.Count; index++)
                 {
 
@@ -139,11 +110,67 @@ namespace datagridview_and_database
                         treeView1.Nodes[index].Nodes.Add(item.ToString());
                     }
                 }
-               //test
+                //test
                 con.Close();
             }
         }
+        private void push_data(object sender, EventArgs e)
+        {
 
+            OleDbConnection con = new OleDbConnection(con_path_mask + fileName);
+
+            conn_mask = String.Empty;
+            push_string = "select";
+            From_collector = String.Empty;
+            for (int counter = 0; counter < treeView1.Nodes.Count; counter++)
+            {
+                bool added = false;
+                foreach (TreeNode checkedNodes in treeView1.Nodes[counter].Nodes)
+                {
+                    if (checkedNodes.Checked)
+                    {
+                        conn_mask += " " + treeview_deleter(treeView1.Nodes[counter].ToString()) +
+                            "." + treeview_deleter(checkedNodes.ToString()) + ",";
+                        if (!added)
+                        { From_collector += treeview_deleter(treeView1.Nodes[counter].ToString()) + ", "; }
+                        added = true;
+                    }
+                }
+
+                //From_collector += treeview_deleter(treeView1.Nodes[counter].ToString()) + ", ";
+            }
+            if (conn_mask != String.Empty)
+            {
+                push_string += conn_mask.Remove(conn_mask.Length - 1) + " from " + From_collector.Remove(From_collector.Length - 2);
+
+                con.Open();
+
+                OleDbCommand select_data = new OleDbCommand(push_string);
+                da = new OleDbDataAdapter(push_string, con);
+                ds = new DataSet();
+                da.Fill(ds);
+                bs = new BindingSource(ds, ds.Tables[0].TableName);
+                dataGridView1.DataSource = bs;
+                curr_Row = dataGridView1.Rows.Count - 1; // считаем количество строк данных
+
+                con.Close();
+            }
+        }
+        private void update_datatables(object sender, EventArgs e)
+        {
+            String insert = "insert";
+
+            for (int counter = 0; counter < dataGridView1.Columns.Count; counter++)
+            {
+                MessageBox.Show(dataGridView1.Columns[counter].HeaderText);
+
+
+               
+            }
+            
+        }
+        private String treeview_deleter(String con_path) {return con_path.Substring(10, con_path.Length - 10);}
+        
         /*
          * 
          * 
@@ -153,12 +180,14 @@ namespace datagridview_and_database
          * 
          * 
          * */
+        private void aaaaaaaaaaaaaaaaaaaaaaaa(object sender, EventArgs e)
+        {
+
+        }
         private void edit_databases(object sender, EventArgs e)
         {
 
         }
-
-
         private string select_command_builder(string a)
         {
 
@@ -188,14 +217,11 @@ namespace datagridview_and_database
             OleDbConnection con = new OleDbConnection(temp);
             con.Open();
 
-
-
             da = new OleDbDataAdapter("select*from Группы", con);
             ds = new DataSet();
             da.Fill(ds);
             bs = new BindingSource(ds, ds.Tables[0].TableName);
 
-            ;
             DataTable dataTables = new DataTable();
             da.Fill(dataTables);
             con.Close();
@@ -204,11 +230,6 @@ namespace datagridview_and_database
                 db_tables_cellnames.Items.Add(item.ToString());
                 db_tables_cellnames.Items.Add("____");
             }
-
-
-
-
-
         } // получаем названия столбцов и закидываем их в секедлистбокс
         private void db_path_strings_checked(object sender, EventArgs e)
         {
@@ -460,9 +481,37 @@ namespace datagridview_and_database
                 //Table_cell_equals_list.Add(addstring);
             }
         }
-       
+        private void push_data_to_dgv_ver3(object sender, EventArgs e)
+        {
+            string select_cmd = "select";
+            string temp = con_path_mask + fileName;
+            //da.Dispose();
 
+            OleDbConnection con = new OleDbConnection(temp);
 
+            if (db_tables_cellnames.CheckedItems.Count == 0)
+            { MessageBox.Show("выберите столбцы"); }
+            else
+            {
+                foreach (var table_cellname in db_tables_cellnames.CheckedItems)
+                {
+                    select_cmd += " " + table_cellname + ",";
+                }
+                int temp_index = select_cmd.Length - 1;
+                select_cmd = select_cmd.Remove(temp_index);
+                select_cmd = select_cmd + " from " + listBox1.SelectedItem;
+                con.Open();
+                OleDbCommand select_data = new OleDbCommand(select_cmd);
+                da = new OleDbDataAdapter(select_cmd, con);
+                ds = new DataSet();
+                da.Fill(ds);
+                bs = new BindingSource(ds, ds.Tables[0].TableName);
+                dataGridView1.DataSource = bs;
+                curr_Row = dataGridView1.Rows.Count - 1; // считаем количество строк данных
+                MessageBox.Show(curr_Row.ToString());
+                con.Close();
+            }
+        } //super new version
 
     }
 }

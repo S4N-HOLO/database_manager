@@ -40,6 +40,8 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.add_data_to_tree = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +56,7 @@
             // db_tables_cellnames
             // 
             this.db_tables_cellnames.FormattingEnabled = true;
-            this.db_tables_cellnames.Location = new System.Drawing.Point(928, 348);
+            this.db_tables_cellnames.Location = new System.Drawing.Point(928, 501);
             this.db_tables_cellnames.Name = "db_tables_cellnames";
             this.db_tables_cellnames.Size = new System.Drawing.Size(50, 34);
             this.db_tables_cellnames.TabIndex = 2;
@@ -77,7 +79,7 @@
             // button7
             // 
             this.button7.Enabled = false;
-            this.button7.Location = new System.Drawing.Point(984, 308);
+            this.button7.Location = new System.Drawing.Point(984, 461);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(164, 34);
             this.button7.TabIndex = 9;
@@ -88,7 +90,7 @@
             // button8
             // 
             this.button8.Enabled = false;
-            this.button8.Location = new System.Drawing.Point(985, 348);
+            this.button8.Location = new System.Drawing.Point(985, 501);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(163, 34);
             this.button8.TabIndex = 10;
@@ -107,7 +109,7 @@
             // db_tables_names
             // 
             this.db_tables_names.FormattingEnabled = true;
-            this.db_tables_names.Location = new System.Drawing.Point(928, 308);
+            this.db_tables_names.Location = new System.Drawing.Point(928, 461);
             this.db_tables_names.Name = "db_tables_names";
             this.db_tables_names.Size = new System.Drawing.Size(50, 34);
             this.db_tables_names.TabIndex = 13;
@@ -116,7 +118,7 @@
             // button10
             // 
             this.button10.Enabled = false;
-            this.button10.Location = new System.Drawing.Point(984, 272);
+            this.button10.Location = new System.Drawing.Point(984, 425);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(164, 30);
             this.button10.TabIndex = 14;
@@ -127,7 +129,7 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(928, 272);
+            this.listBox1.Location = new System.Drawing.Point(928, 425);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(50, 30);
             this.listBox1.TabIndex = 16;
@@ -139,7 +141,7 @@
             this.treeView1.CheckBoxes = true;
             this.treeView1.Location = new System.Drawing.Point(928, 169);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(278, 97);
+            this.treeView1.Size = new System.Drawing.Size(278, 250);
             this.treeView1.TabIndex = 17;
             // 
             // add_data_to_tree
@@ -152,11 +154,33 @@
             this.add_data_to_tree.UseVisualStyleBackColor = true;
             this.add_data_to_tree.Click += new System.EventHandler(this.newultramethod_add_data_totree);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(758, 153);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(162, 42);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "загрузить данные тест";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.push_data);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(760, 201);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(160, 35);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "Вкинуть данные в таблицы";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.update_datatables);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1242, 551);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.add_data_to_tree);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.listBox1);
@@ -188,6 +212,8 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button add_data_to_tree;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
